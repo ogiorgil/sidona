@@ -1,0 +1,38 @@
+body {
+    background-color: aqua;
+}
+
+table,
+td,
+th {
+    border: 1px solid black;
+    text-align: center;
+}
+
+table {
+    border-collapse: collapse;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.button-container {
+    height: 50px;
+    position: relative;
+}
+
+.center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.padded-button {
+    margin: 20px;
+}
+
+.div-row {
+    display: table-row;
+}
