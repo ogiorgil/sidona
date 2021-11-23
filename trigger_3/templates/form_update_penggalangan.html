@@ -15,11 +15,11 @@
 	<div style="padding-left: 35px; display: table;">
 		<div class="div-row">
 			<label for="id_penggalangan">ID Penggalangan Dana: </label>
-			<input id="form_id_penggalangan" type="text" disabled>
+			<input id="form_id_penggalangan" value="R-001" type="text" disabled>
 		</div>
 		<div class="div-row">
 			<label for="email_penggalang">Email Penggalang Dana: </label>
-			<input id="form_email_penggalang" type="text" disabled>
+			<input id="form_email_penggalang" value="timothy@gmail.com" type="text" disabled>
 		</div>
 		<div class="div-row">
 			<label for="judul">Judul: </label>
@@ -47,7 +47,7 @@
 		</div>
 		<div class="div-row">
 			<label for="status_verifikasi">Status Verifikasi: </label>
-			<input id="form_status_verifikasi" type="text" disabled>
+			<input id="form_status_verifikasi" value="Belum Terverifikasi" type="text" disabled>
 		</div>
 		<div class="div-row">
 			<label for="diverifikasi_oleh">Diverifikasi Oleh: </label>
@@ -59,9 +59,9 @@
 	<div style="padding-left: 35px; display: table;">
 		<div class="div-row">
 			<label for="kategori">Kategori: </label>
-			<input id="form_kategori" type="text" disabled>
+			<input id="form_kategori" value="{{ kategori }}" type="text" disabled>
 		</div>
-		{% if kesehatan %}
+		{% if kategori == 'Kesehatan' %}
 		<div class="div-row">
 			<label for="nik_pasien">NIK Pasien: </label>
 			<input id="form_nik_pasien" type="text" />
@@ -79,7 +79,7 @@
 			<input id="form_komorbid" type="text" />
 		</div>
 		{% endif %}
-		{% if rumah_ibadah %}
+		{% if kategori == 'Rumah Ibadah' %}
 		<div class="div-row">
 			<label for="nomor_sertifikat_rumah_ibadah">Nomor Sertifikat Rumah Ibadah: </label>
 			<input id="form_nomor_sertifikat_rumah_ibadah" type="text" />

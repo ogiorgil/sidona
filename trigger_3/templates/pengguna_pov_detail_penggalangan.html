@@ -15,15 +15,16 @@
 	<div style="padding-left: 35px; display: table;">
 		<div class="div-row">
 			<label for="id_penggalangan">ID Penggalangan Dana: </label>
-			<input id="form_id_penggalangan" type="text" disabled>
+			<input id="form_id_penggalangan" value="K-001" type="text" disabled>
 		</div>
 		<div class="div-row">
 			<label for="email_penggalang">Email Penggalang Dana: </label>
-			<input id="form_email_penggalang" type="text" disabled>
+			<input id="form_email_penggalang" value="david@gmail.com" type="text" disabled>
 		</div>
 		<div class="div-row">
 			<label for="judul">Judul: </label>
-			<input id="form_judul" type="text" disabled />
+			<input id="form_judul" value="Ayo bantu Zulfahri Menghadapi penyakit Demam Berdarahnya!" type="text"
+				disabled />
 		</div>
 		<div class="div-row">
 			<label for="deskripsi">Deskripsi: </label>
@@ -31,27 +32,27 @@
 		</div>
 		<div class="div-row">
 			<label for="kota">Kota: </label>
-			<input id="form_kota" type="text" disabled />
+			<input id="form_kota" value="Bandung" type="text" disabled />
 		</div>
 		<div class="div-row">
 			<label for="provinsi">Provinsi: </label>
-			<input id="form_provinsi" type="text" disabled />
+			<input id="form_provinsi" value="Jawa Barat" type="text" disabled />
 		</div>
 		<div class="div-row">
 			<label for="deadline_penggalangan">Deadline Penggalangan Dana: </label>
-			<input id="form_deadline_penggalangan" type="text" disabled />
+			<input id="form_deadline_penggalangan" value="7 Desember 2021" type="text" disabled />
 		</div>
 		<div class="div-row">
 			<label for="jumlah_target_dana">Jumlah Target Dana (Rupiah): </label>
-			<input id="form_jumlah_target_dana" type="text" disabled />
+			<input id="form_jumlah_target_dana" value="Rp1.000.000,00" type="text" disabled />
 		</div>
 		<div class="div-row">
 			<label for="status_verifikasi">Status Verifikasi: </label>
-			<input id="form_status_verifikasi" type="text" disabled>
+			<input id="form_status_verifikasi" value="Sudah Terverifikasi" type="text" disabled>
 		</div>
 		<div class="div-row">
 			<label for="diverifikasi_oleh">Diverifikasi Oleh: </label>
-			<input id="form_diverifikasi_oleh" type="text" disabled>
+			<input id="form_diverifikasi_oleh" value="admin@gmail.com" type="text" disabled>
 		</div>
 	</div>
 
@@ -59,27 +60,27 @@
 	<div style="padding-left: 35px; display: table;">
 		<div class="div-row">
 			<label for="kategori">Kategori: </label>
-			<input id="form_kategori" type="text" disabled>
+			<input id="form_kategori" value="{{ kategori }}" type="text" disabled>
 		</div>
-		{% if kesehatan %}
+		{% if kategori == 'Kesehatan' %}
 		<div class="div-row">
 			<label for="nik_pasien">NIK Pasien: </label>
-			<input id="form_nik_pasien" type="text" disabled />
+			<input id="form_nik_pasien" value="1497199854621440" type="text" disabled />
 		</div>
 		<div class="div-row">
 			<label for="nama_pasien">Nama Pasien: </label>
-			<input id="form_nama_pasien" type="text" disabled />
+			<input id="form_nama_pasien" value="Modesty Rickertsen" type="text" disabled />
 		</div>
 		<div class="div-row">
 			<label for="penyakit_utama">Penyakit Utama: </label>
-			<input id="form_penyakit_utama" type="text" disabled />
+			<input id="form_penyakit_utama" value="Meloxicam" type="text" disabled />
 		</div>
 		<div class="div-row">
 			<label for="komorbid">Komorbid: </label>
-			<input id="form_komorbid" type="text" disabled />
+			<input id="form_komorbid" value="Multi-Symptom Mapap Cold Formula" type="text" disabled />
 		</div>
 		{% endif %}
-		{% if rumah_ibadah %}
+		{% if kategori == 'Rumah Ibadah' %}
 		<div class="div-row">
 			<label for="nomor_sertifikat_rumah_ibadah">Nomor Sertifikat Rumah Ibadah: </label>
 			<input id="form_nomor_sertifikat_rumah_ibadah" type="text" disabled />
@@ -91,7 +92,8 @@
 		{% endif %}
 		<div class="div-row">
 			<label for="berkas_penggalangan">Berkas Penggalangan Dana: </label>
-			<input id="form_berkas_penggalangan" type="text" disabled />
+			<input id="form_berkas_penggalangan" value="http://dummyimage.com/118x100.png/cc0000/ffffff" type="text"
+				disabled />
 		</div>
 
 		<div class="div-row">

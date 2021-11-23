@@ -12,7 +12,8 @@ def daftar_penggalangan_admin_pov(request):
 
 
 def form_update_penggalangan(request):
-    return render(request, "form_update_penggalangan.html")
+    response = {"kategori": "Rumah Ibadah"}
+    return render(request, "form_update_penggalangan.html", response)
 
 
 def form_verifikasi_penggalangan(request):
@@ -20,7 +21,8 @@ def form_verifikasi_penggalangan(request):
 
 
 def detail_penggalangan_pengguna_pov(request):
-    return render(request, "pengguna_pov_detail_penggalangan.html")
+    response = {"kategori": "Kesehatan"}
+    return render(request, "pengguna_pov_detail_penggalangan.html", response)
 
 
 def form_create_kategori(request):
