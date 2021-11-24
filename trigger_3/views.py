@@ -34,4 +34,18 @@ def form_update_kategori(request):
 
 
 def kategori_penggalangan(request):
-    return render(request, "admin_pov_daftar_kategori.html")
+    kategoris = [
+        "Rumah Ibadah",
+        "Kesehatan",
+        "Jembatan",
+        "Pendidikan",
+        "Sembako",
+        "Yatim Piatu",
+        "Bencana",
+    ]
+    lst = list()
+    for i in enumerate(kategoris):
+        lst.append({"id": i[0] + 1, "namakategori": i[1]})
+
+    response = {"kategoris": lst}
+    return render(request, "admin_pov_daftar_kategori.html", response)
