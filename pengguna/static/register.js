@@ -12,9 +12,13 @@ $(document).ready(() => {
 
     if (jenisAkun === "Admin") {
       $("#pdSection").hide();
+      $("#pdiSection").hide();
+      $("#pdoSection").hide();
       $("#adminSection").show();
     } else if (jenisAkun === "Penggalang Dana") {
       $("#adminSection").hide();
+      $("#pdiSection").hide();
+      $("#pdoSection").hide();
       $("#pdSection").show();
     }
   });
