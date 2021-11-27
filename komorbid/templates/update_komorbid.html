@@ -1,0 +1,32 @@
+{% load static %}
+
+<head>
+  <title>Update Komorbid</title>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <link
+    rel="stylesheet"
+    type="text/css"
+    href="{% static 'komorbidUpdate.css' %}"
+  />
+  <script src="{% static 'komorbidUpdate.js' %}"></script>
+</head>
+
+<body>
+  <h1>Form Update Penyakit Komorbid</h1>
+  <b>Informasi Penyakit Komorbid</b><br />
+
+  <div class="form">
+    <label for="idPdSelect">ID Penggalangan Dana</label>
+    <select id="idPdSelect" disabled>
+      <option value="K-001">K-001</option>
+    </select>
+
+    <label for="komorbidInput">Komorbid</label>
+    <input id="komorbidInput" placeholder="Komorbid" />
+
+    <br />
+    <button id="updateButton">Update</button>
+  </div>
+</body>

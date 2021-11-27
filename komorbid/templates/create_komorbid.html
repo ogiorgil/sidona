@@ -1,0 +1,32 @@
+{% load static %}
+
+<head>
+  <title>Create Komorbid</title>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <link
+    rel="stylesheet"
+    type="text/css"
+    href="{% static 'komorbidCreate.css' %}"
+  />
+  <script src="{% static 'komorbidCreate.js' %}"></script>
+</head>
+
+<body>
+  <h1>Form Penyakit Komorbid</h1>
+  <b>Informasi Penyakit Komorbid</b><br />
+
+  <div class="form">
+    <label for="idPdSelect">ID Penggalangan Dana</label>
+    <select id="idPdSelect">
+      <option value="K-001">K-001</option>
+    </select>
+
+    <label for="komorbidInput">Komorbid</label>
+    <input id="komorbidInput" placeholder="Komorbid" />
+
+    <br />
+    <button id="createButton">Create</button>
+  </div>
+</body>
