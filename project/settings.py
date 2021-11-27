@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     "penggalangan_dana",
     "komorbid",
     "trigger_4",
+    "pengguna"
 ]
 
 MIDDLEWARE = [
