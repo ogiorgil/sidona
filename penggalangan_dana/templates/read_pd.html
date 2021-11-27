@@ -1,0 +1,79 @@
+{% load static %}
+
+<head>
+  <title>Read Penggalangan Dana</title>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="{% static 'pdRead.css' %}" />
+  <script src="{% static 'pdRead.js' %}"></script>
+</head>
+
+<body>
+  <h1>Daftar Penggalangan Dana Pribadi</h1>
+
+  <table>
+    <tr>
+      <th>Id</th>
+      <th>Judul</th>
+      <th>Kota</th>
+      <th>Prov</th>
+      <th>Tanggal Aktif Awal</th>
+      <th>Deadline</th>
+      <th>Sisa Hari</th>
+      <th>Target Dana</th>
+      <th>Kategori</th>
+      <th>Status Verifikasi</th>
+      <th>Action</th>
+    </tr>
+    <tr>
+      <td>K-001</td>
+      <td>Ayo bantu Zulfahri menghadapi penyakit Demam Berdarahnya!</td>
+      <td>Bandung</td>
+      <td>Jawa Barat</td>
+      <td>2021-11-15</td>
+      <td>2021-12-07</td>
+      <td>15</td>
+      <td>1000000</td>
+      <td>Kesehatan</td>
+      <td>Sudah Terverifikasi</td>
+      <td>
+        <button type="button">Detail</button>
+        <button type="button">Cairkan</button>
+        <button type="button">Delete</button>
+      </td>
+    </tr>
+    <tr>
+      <td>R-001</td>
+      <td>Rekonstruksi Musholla Fasilkom oleh James Rond</td>
+      <td>Jakarta</td>
+      <td>DKI Jakarta</td>
+      <td></td>
+      <td>2021-12-10</td>
+      <td>15</td>
+      <td>10000000</td>
+      <td>Rumah Ibadah</td>
+      <td>Belum Terverifikasi</td>
+      <td>
+        <button type="button">Detail</button>
+        <button type="button">Delete</button>
+      </td>
+    </tr>
+    <tr>
+      <td>K-002</td>
+      <td>Kesehatan2</td>
+      <td>Jakarta</td>
+      <td>DKI Jakarta</td>
+      <td></td>
+      <td>2021-12-10</td>
+      <td>15</td>
+      <td>10000000</td>
+      <td>Kesehatan</td>
+      <td>Belum Terverifikasi</td>
+      <td>
+        <button type="button">Detail</button>
+        <button type="button">Delete</button>
+      </td>
+    </tr>
+  </table>
+</body>

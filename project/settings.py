@@ -23,6 +23,8 @@ INSTALLED_APPS = [
     "whitenoise.runserver_nostatic",
     "django.contrib.staticfiles",
     "trigger_3",
+    "penggalangan_dana",
+    "komorbid",
     "trigger_4",
 ]
 

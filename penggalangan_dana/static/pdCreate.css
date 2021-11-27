@@ -1,0 +1,12 @@
+body {
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  text-align: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 0;
+}

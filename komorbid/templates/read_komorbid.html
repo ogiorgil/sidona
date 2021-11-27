@@ -1,0 +1,36 @@
+{% load static %}
+
+<head>
+  <title>Read Komorbid</title>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="{% static 'komorbidRead.css' %}" />
+  <script src="{% static 'komorbidRead.js' %}"></script>
+</head>
+
+<body>
+  <h1>Kelola Penyakit Komorbid</h1>
+
+  <button>Tambah Penyakit Komorbid Baru</button>
+
+  <table>
+    <tr>
+      <th>Id</th>
+      <th>Judul</th>
+      <th>Penyakit Utama</th>
+      <th>Penyakit Komorbid</th>
+      <th>Action</th>
+    </tr>
+    <tr>
+      <td>K-001</td>
+      <td>Ayo bantu Zulfahri menghadapi penyakit Demam Berdarahnya!</td>
+      <td>Demam Berdarah</td>
+      <td>Pusing Kepala</td>
+      <td>
+        <button type="button">Update</button>
+        <button type="button">Delete</button>
+      </td>
+    </tr>
+  </table>
+</body>
