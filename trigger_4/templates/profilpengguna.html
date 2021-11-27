@@ -12,50 +12,76 @@ th, td {
   text-align: left;
   border-bottom: 1px solid #DDD;
 }
+html {
+    display: table;
+    margin: auto;
+}
 
+body {
+    display: table-cell;
+    vertical-align: middle;
+}
 tr:hover {background-color: #D6EEEE;}
+
+.content{
+  align-items: center;
+}
 </style>
 </head>
 <body>
-
+<div class = 'content'>
 <h2>Profil Pengguna</h2>
-<p>Email		:[disabled]</p>
-<p>Nama			:[disabled]</p>
-<p>Nomor HP		:[disabled]</p>
-<p>Alamat		:[disabled]</p>
-<p>Nama Bank	:[disabled]</p>
-<p>No Rekening	:[disabled]</p>
-<p>Jenis		:[disabled]</p>
-<br>
-<p>NIK			:[disabled]</p>
-<p>Tanggal Lahir:[disabled]</p>
-<p>Jenis Kelamin:[disabled]</p>
-<p>Foto KTP		:[link/gambar]</p>
-<p><b>Saldo Donapay: 0</b></p>
-<br>
-<p><b>Wishlist Donasi: 0</b></p>
-<table>
-  <tr>
-    <th>ID</th>
-    <th>Judul</th>
-    <th>Kategori</th>
-    <th>Action</th>
-  </tr>
-  <tr>
-    <td>Peter</td>
-    <td>Griffin</td>
-    <td>$100</td>
-    <td><button type="button">Detail</button>
-    <button type="button">Donasi</button>
-    <button type="button">Tambah ke Wishlist</button></td>
-  </tr>
-  <p><b>Jumlah Wishlist : 1</b></p>
 
-</table>
+<label for="email_pengguna">Email : </label>
+<input id="profil_email" value="jsimony2@skyrock.com" type="text" disabled>
 <br>
+<br>
+<label for="nama_pengguna">Nama : </label>
+<input id="profil_nama" value="J Simon" type="text" disabled>
+<br>
+<br>
+<label for="no_hp">Nomor HP : </label>
+<input id="profil_hp" value="081218439" type="text" disabled>
+<br>
+<br>
+<label for="alamat">Alamat : </label>
+<input id="profil_alamat" value="Jalan Mekarsari" type="text" disabled>
+<br>
+<br>
+<label for="bank">Nama Bank : </label>
+<input id="profil_bank" value="BCA" type="text" disabled>
+<br>
+<br>
+<label for="rekening">No Rekening : </label>
+<input id="profil_rekening" value="12910218092" type="text" disabled>
+<br>
+<br>
+<labelp>Jenis		:</label>
+  <br>
+  <input type="radio" id="individu" name="opsi" value="individu" checked>
+  <label for="ya">Individu</label><br>
+  <input type="radio" id="organisasi" name="opsi" value="organisasi" disabled>
+  <label for="tidak">Organisasi</label>
+<br>
+<br>
+<label for="nik">NIK : </label>
+<input id="profil_nik" value="12910218092" type="text" disabled>
+<br>
+<br>
+<label for="tanggal">Tanggal Lahir : </label>
+<input id="profil_tanggal" value="2000-11-04" type="date" disabled>
+<br>
+<br>
+<label for="jenis_kelamin">Jenis Kelamin : </label>
+<input id="profil_jenis_kelamin" value="Male" type="text" disabled>
+
+<p>Foto KTP		:<br><img src =https://image.shutterstock.com/z/stock-vector-ktp-indonesia-id-card-1628461459.jpg width="120 px"></p>
+<p><b>Saldo Donapay: 0</b></p>
+
+<p><b>Wishlist Donasi: 0</b></p>
 
 <button>Cancel</button>
-
+</div>
 </body>
 </html>
 
