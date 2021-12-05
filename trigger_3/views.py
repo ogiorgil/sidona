@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from utils.query import query
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 
@@ -25,8 +27,18 @@ def detail_penggalangan_pengguna_pov(request):
     return render(request, "pengguna_pov_detail_penggalangan.html", response)
 
 
+@csrf_exempt
 def form_create_kategori(request):
-    return render(request, "form_create_kategori_penggalangan.html")
+    if request.method == "POST":
+        print(request.POST)
+        body = request.POST
+
+    context = query("SELECT id FROM KATEGORI_PD")[-1]
+    print(context)
+    print(int(context.id) + 1)
+    print(type(context.id))
+    context = {"context": context}
+    return render(request, "form_create_kategori_penggalangan.html", context)
 
 
 def form_update_kategori(request):
@@ -34,18 +46,6 @@ def form_update_kategori(request):
 
 
 def kategori_penggalangan(request):
-    kategoris = [
-        "Rumah Ibadah",
-        "Kesehatan",
-        "Jembatan",
-        "Pendidikan",
-        "Sembako",
-        "Yatim Piatu",
-        "Bencana",
-    ]
-    lst = list()
-    for i in enumerate(kategoris):
-        lst.append({"id": i[0] + 1, "namakategori": i[1]})
-
-    response = {"kategoris": lst}
-    return render(request, "admin_pov_daftar_kategori.html", response)
+    data = query("SELECT id, namakategori FROM kategori_pd")
+    argument = {"kategoris": data}
+    return render(request, "admin_pov_daftar_kategori.html", argument)
