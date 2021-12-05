@@ -7,4 +7,5 @@ urlpatterns = [
     path("profil/", views.read_pengguna),
     path("daftar_pengguna/", views.tabel_daftar_pengguna),
     path("admin_detail_pengguna/", views.admin_pov_read_pengguna),
+    path("admins", views.get_admin),
 ]
