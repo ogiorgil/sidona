@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +6,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" type="text/css" href="../static/trigger_3/css/styles.css">
+	<link rel="stylesheet" type="text/css" href="{% static 'trigger_3/css/styles.css' %}">
 	<title>Document</title>
 </head>
 
@@ -23,15 +24,16 @@
 			<th>Kategori</th>
 			<th>Action</th>
 		</tr>
+		{% for p in penggalangans %}
 		<tr>
-			<td>K-001</td>
-			<td>Ayo bantu Zulfahri Menghadapi penyakit Demam Berdarahnya!</td>
-			<td>Bandung</td>
-			<td>Jawa Barat</td>
-			<td>7 Desember 2021</td>
-			<td>20 hari</td>
-			<td>Rp1.000.000,00</td>
-			<td>Kesehatan</td>
+			<td>{{ p.id }}</td>
+			<td>{{ p.judul }}</td>
+			<td>{{ p.kota }}</td>
+			<td>{{ p.provinsi }}</td>
+			<td>{{ p.tanggalaktifakhir }}</td>
+			<td>{{ p.sisahari }}</td>
+			<td>{{ p.jumlahdibutuhkan }}</td>
+			<td>{{ p.namakategori }}</td>
 			<td>
 				<button>
 					Detail
@@ -44,6 +46,7 @@
 				</button>
 			</td>
 		</tr>
+		{% endfor %}
 	</table>
 </body>
 

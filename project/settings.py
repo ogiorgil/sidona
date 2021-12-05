@@ -27,7 +27,7 @@ INSTALLED_APPS = [
     "penggalangan_dana",
     "komorbid",
     "trigger_4",
-    "pengguna"
+    "pengguna",
 ]
 
 MIDDLEWARE = [
@@ -66,15 +66,16 @@ WSGI_APPLICATION = "project.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 DATABASE_URL = os.environ.get(
-    "DATABASE_URL", "postgres://mergcrtdwwhzem:37bc9399f220c7655e23dce7fe106e46cd536d3083adbc03eb0a2cbcaa5c0aa8@ec2-35-168-80-116.compute-1.amazonaws.com:5432/db6spui29g41gb")
+    "DATABASE_URL",
+    "postgres://mergcrtdwwhzem:37bc9399f220c7655e23dce7fe106e46cd536d3083adbc03eb0a2cbcaa5c0aa8@ec2-35-168-80-116.compute-1.amazonaws.com:5432/db6spui29g41gb",
+)
 
 DATABASES = {
     "default": dj_database_url.config(),
 }
 
 DATABASES["default"] = dj_database_url.config()
-DATABASES["default"] = dj_database_url.config(
-    default=DATABASE_URL, conn_max_age=500)
+DATABASES["default"] = dj_database_url.config(default=DATABASE_URL, conn_max_age=500)
 
 
 # Password validators
