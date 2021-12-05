@@ -1,8 +1,6 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 
-from utils.query import query
-
 
 def login(request):
     return render(request, "login.html")
@@ -22,8 +20,3 @@ def tabel_daftar_pengguna(request):
 
 def admin_pov_read_pengguna(request):
     return render(request, "admin_pov_read_pengguna.html")
-
-
-def get_admin(request):
-    hasil = query("insert into admin values ('davidasdasd@gmail.com', 'asdab', 'asdab', '082123456789', '8')")
-    print(hasil)

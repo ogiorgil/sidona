@@ -1,4 +1,4 @@
-from django.db import connection
+from django.db import connection, DatabaseError, IntegrityError
 from collections import namedtuple
 
 
@@ -13,7 +13,22 @@ def query(query_str: str):
     hasil = []
     with connection.cursor() as cursor:
         cursor.execute("SET SEARCH_PATH TO SIDONA")
-        cursor.execute(query_str)
-        hasil = map_cursor(cursor)
+
+        try:
+            cursor.execute(query_str)
+
+            if query_str.lower().startswith("select"):
+                # Kalau ga error, return hasil SELECT
+                hasil = map_cursor(cursor)
+            else:
+                # Kalau ga error, return jumlah row yang termodifikasi oleh INSERT, UPDATE, DELETE
+                hasil = cursor.rowcount
+        except DatabaseError:
+            hasil = "DatabaseError"
+        except IntegrityError:
+            hasil = "IntegrityError"
+        except:
+            # Ga tau error apa
+            hasil = "Error"
 
     return hasil
