@@ -10,23 +10,26 @@
 </head>
 
 <body>
-	<div style="display: table;">
-		<div class="div-row">
-			<h1>Form Create Kategori Penggalangan Dana</h1>
+	<form method="post">
+		<div style="display: table;">
+			<div class="div-row">
+				<h1>Form Create Kategori Penggalangan Dana</h1>
+			</div>
+			<div class="div-row">
+				<label for="id_kategori">ID Kategori: </label>
+				<input id="form_id_kategori" value="{{ context.id }}" disabled />
+			</div>
+			<div class="div-row">
+				<label for="form_kategori">Nama Kategori: </label>
+				<input name="namakategori" id="form_kategori" type="text" required>
+			</div>
+			<div class="div-row">
+				<button class="padded-button">
+					CREATE
+				</button>
+			</div>
 		</div>
-		<div class="div-row">
-			<label for="id_kategori">ID Kategori: </label>
-			<input id="form_id_kategori" value="8" disabled />
-		</div>
-		<div class="div-row">
-			<label for="kategori">Nama Kategori: </label>
-			<input id="form_kategori" type="text">
-		</div>
-		<div class="div-row">
-			<button class="padded-button">
-				CREATE
-			</button>
-		</div>
+	</form>
 </body>
 
 </html>
