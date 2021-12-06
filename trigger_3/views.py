@@ -50,15 +50,28 @@ def form_create_kategori(request):
         return HttpResponseRedirect("/t3/kategori-penggalangan-admin/")
 
     context = query("SELECT id FROM KATEGORI_PD ORDER BY id DESC LIMIT 1")[0]
-    context = {"context": context}
+    latest_id = int(context.id) + 1
+    context = {"latest_id": latest_id}
     return render(request, "form_create_kategori_penggalangan.html", context)
 
 
+@csrf_exempt
 def form_update_kategori(request):
-    return render(request, "form_update_kategori_penggalangan.html")
+    id_kategori = request.GET.get("id")
+    nama_kategori = request.GET.get("nama")
+    if request.method == "POST":
+        body = request.POST
+        namakategori = body["namakategori"]
+        query_str = f"""UPDATE kategori_pd
+        SET namakategori='{namakategori}', alias_kategori='{namakategori[0]}' 
+        WHERE id='{id_kategori}'"""
+        print(query(query_str))
+        return HttpResponseRedirect("/t3/kategori-penggalangan-admin")
+    context = {"id_kategori": id_kategori, "nama_kategori": nama_kategori}
+    return render(request, "form_update_kategori_penggalangan.html", context)
 
 
 def kategori_penggalangan(request):
     data = query("SELECT id, namakategori FROM kategori_pd")
-    argument = {"kategoris": data}
-    return render(request, "admin_pov_daftar_kategori.html", argument)
+    context = {"kategoris": data}
+    return render(request, "admin_pov_daftar_kategori.html", context)

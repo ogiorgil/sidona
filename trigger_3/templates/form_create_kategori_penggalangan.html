@@ -17,12 +17,12 @@
 				<h1>Form Create Kategori Penggalangan Dana</h1>
 			</div>
 			<div class="div-row">
-				<label for="id_kategori">ID Kategori: </label>
-				<input id="form_id_kategori" value="{{ context.id|add:'1' }}" disabled />
+				<label for="form_id_kategori">ID Kategori: </label>
+				<input name="idkategori" id="form_id_kategori" value="{{ latest_id }}" disabled />
 			</div>
 			<div class="div-row">
-				<label for="form_kategori">Nama Kategori: </label>
-				<input name="namakategori" id="form_kategori" type="text" required>
+				<label for="form_nama_kategori">Nama Kategori: </label>
+				<input name="namakategori" id="form_nama_kategori" type="text" required>
 			</div>
 			<div class="div-row">
 				<button class="padded-button">
