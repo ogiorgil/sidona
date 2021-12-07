@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,28 +6,31 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" type="text/css" href="../static/trigger_3/css/styles.css">
+	<link rel="stylesheet" type="text/css" href="{% static 'trigger_3/css/styles.css' %}">
 	<title>Document</title>
 </head>
 
 <body>
-	<div style="display: table;">
-		<div class="div-row">
-			<h1>Form Update Kategori Penggalangan Dana</h1>
-		</div>
-		<div class="div-row">
-			<label for="id_kategori">ID Kategori: </label>
-			<input id="form_id_kategori" value="2" disabled />
-		</div>
-		<div class="div-row">
-			<label for="kategori">Nama Kategori: </label>
-			<input id="form_kategori" type="text">
-		</div>
-		<div class="div-row">
-			<button class="padded-button">
-				UPDATE
-			</button>
-		</div>
+	<form method="post">
+		<div style="display: table;">
+			<div class="div-row">
+				<h1>Form Update Kategori Penggalangan Dana</h1>
+			</div>
+			<div class="div-row">
+				<label for="form_id_kategori">ID Kategori: </label>
+				<input name="idkategori" id="form_id_kategori" value="{{ id_kategori }}" disabled />
+			</div>
+			<div class="div-row">
+				<label for="form_nama_kategori">Nama Kategori: </label>
+				<input name="namakategori" id="form_nama_kategori" type="text" placeholder="{{ nama_kategori }}"
+					required>
+			</div>
+			<div class="div-row">
+				<button class="padded-button">
+					UPDATE
+				</button>
+			</div>
+	</form>
 </body>
 
 </html>

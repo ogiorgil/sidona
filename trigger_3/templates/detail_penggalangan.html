@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="../static/trigger_3/css/styles.css">
+	<title>Document</title>
+</head>
+
+<body>
+	<h1>Detail Penggalangan Dana: Ayo bantu Zulfahri Menghadapi penyakit Demam Berdarahnya!</h1>
+	<h3>Informasi Umum Penggalangan Dana</h3>
+	<div style="padding-left: 35px; display: table;">
+		<div class="div-row">
+			<label for="form_id_penggalangan">ID Penggalangan Dana: </label>
+			<input id="form_id_penggalangan" value="{{ p.id }}" type="text" disabled>
+		</div>
+		<div class="div-row">
+			<label for="form_email_penggalang">Email Penggalang Dana: </label>
+			<input id="form_email_penggalang" value="{{ p.emailuser }}" type="text" disabled>
+		</div>
+		<div class="div-row">
+			<label for="form_judul">Judul: </label>
+			<input id="form_judul" value="{{ p.judul }}" type="text" disabled />
+		</div>
+		<div class="div-row">
+			<label for="form_deskripsi">Deskripsi: </label>
+			<input id="form_deskripsi" value="{{ p.deskripsi }}" type="text" disabled />
+		</div>
+		<div class="div-row">
+			<label for="form_kota">Kota: </label>
+			<input id="form_kota" value="{{ p.kota }}" type="text" disabled />
+		</div>
+		<div class="div-row">
+			<label for="form_provinsi">Provinsi: </label>
+			<input id="form_provinsi" value="{{ p.provinsi }}" type="text" disabled />
+		</div>
+		<div class="div-row">
+			<label for="form_deadline_penggalangan">Deadline Penggalangan Dana: </label>
+			<input id="form_deadline_penggalangan" value="{{ p.tanggalaktifakhir }}" type="text" disabled />
+		</div>
+		<div class="div-row">
+			<label for="form_jumlah_target_dana">Jumlah Target Dana (Rupiah): </label>
+			<input id="form_jumlah_target_dana" value="{{ p.jumlahdibutuhkan }}" type="text" disabled />
+		</div>
+		<div class="div-row">
+			<label for="form_status_verifikasi">Status Verifikasi: </label>
+			<input id="form_status_verifikasi" value="{{ p.statusverifikasi }}" type="text" disabled>
+		</div>
+		<div class="div-row">
+			<label for="form_diverifikasi_oleh">Diverifikasi Oleh: </label>
+			<input id="form_diverifikasi_oleh" value="{{ p.emailadmin|default_if_none:'' }}" type="text" disabled>
+		</div>
+	</div>
+
+	<h3>Informasi Tambahan Penggalangan Dana</h3>
+	<div style="padding-left: 35px; display: table;">
+		<div class="div-row">
+			<label for="form_kategori">Kategori: </label>
+			<input id="form_kategori" value="{{ p.namakategori }}" type="text" disabled>
+		</div>
+		{% if p.namakategori == 'Kesehatan' %}
+		<div class="div-row">
+			<label for="form_nik_pasien">NIK Pasien: </label>
+			<input id="form_nik_pasien" value="{{ pasien.nik }}" type="text" disabled />
+		</div>
+		<div class="div-row">
+			<label for="form_nama_pasien">Nama Pasien: </label>
+			<input id="form_nama_pasien" value="{{ pasien.nama }}" type="text" disabled />
+		</div>
+		<div class="div-row">
+			<label for="form_penyakit_utama">Penyakit Utama: </label>
+			<input id="form_penyakit_utama" value="{{ pasien.penyakit }}" type="text" disabled />
+		</div>
+		<div class="div-row">
+			<label for="form_komorbid">Komorbid: </label>
+			<input id="form_komorbid" value="{% for k in komorbid %}{{ k.komorbid }}, {% endfor %}" type="text"
+				disabled />
+		</div>
+		{% endif %}
+		{% if p.namakategori == 'Rumah Ibadah' %}
+		<div class="div-row">
+			<label for="form_nomor_sertifikat_rumah_ibadah">Nomor Sertifikat Rumah Ibadah: </label>
+			<input id="form_nomor_sertifikat_rumah_ibadah" type="text" value="{{ rumah_ibadah.idrumahibadah }}"
+				type="text" disabled />
+		</div>
+		<div class="div-row">
+			<label for="form_kategori_aktivitas">Kategori Aktivitas: </label>
+			<input id="form_kategori_aktivitas" type="text" value="{{ rumah_ibadah.kategori }}" disabled />
+		</div>
+		{% endif %}
+		<div class="div-row">
+			<label for="form_berkas_penggalangan">Berkas Penggalangan Dana: </label>
+			<input id="form_berkas_penggalangan" value="{{ p.linkrepo }}" type="text" disabled />
+		</div>
+
+		<div class="div-row">
+			<label for="form_catatan_pengajuan">Catatan Pengajuan: </label>
+			<input id="form_catatan_pengajuan" value="{% for c in catatans %}{{ c.informasi}}, {% endfor %}" type="text"
+				disabled>
+		</div>
+
+		<br>
+		<div class="div-row">
+			<label for="form_jumlah_terkumpul">Jumlah Terkumpul: </label>
+			<input id="form_jumlah_terkumpul" value="{{ p.jumlahterkumpul }}" disabled>
+			<br>
+			<b>Donatur: </b>
+			<br>
+			<table>
+				<tr>
+					<th>Email</th>
+					<th>Timestamp</th>
+					<th>Nominal</th>
+					<th>Doa</th>
+				</tr>
+				{% for d in donasis %}
+				<tr>
+					<td>{{ d.email }}</td>
+					<td>{{ d.timestamp }}</td>
+					<td>{{ d.nominal }}</td>
+					<td>{{ d.doa }}</td>
+				</tr>
+				{% endfor %}
+			</table>
+			<br>
+		</div>
+
+		<div class="div-row">
+			<label for="jumlah_terpakai">Jumlah Terpakai: </label>
+			<input id="form_jumlah_terpakai" value="{{ p.jumlahterpakai }}" disabled>
+			<br>
+			<b>Rincian Penggunaan:</b>
+			<br>
+			<table>
+				<tr>
+					<th>Waktu</th>
+					<th>Nominal</th>
+					<th>Deskripsi</th>
+				</tr>
+				{% for pg in penggunaan_danas %}
+				<tr>
+					<td>{{ pg.timestamp }}</td>
+					<td>{{ pg.nominal }}</td>
+					<td>{{ pg.deskripsi }}</td>
+				</tr>
+				{% endfor %}
+			</table>
+		</div>
+
+	</div>
+
+	<div class="button-container">
+		<button class="center" onclick="history.back()">
+			Cancel
+		</button>
+	</div>
+</body>
+
+</html>

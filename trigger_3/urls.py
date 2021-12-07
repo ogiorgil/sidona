@@ -26,8 +26,8 @@ urlpatterns = [
     ),
     path(
         "detail-penggalangan/",
-        views.detail_penggalangan_pengguna_pov,
-        name="detail-penggalangan-pengguna",
+        views.detail_penggalangan,
+        name="detail-penggalangan",
     ),
     path(
         "create-kategori/",
