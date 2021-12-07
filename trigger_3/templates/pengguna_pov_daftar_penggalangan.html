@@ -3,51 +3,53 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" type="text/css" href="{% static 'trigger_3/css/styles.css' %}">
-	<title>Document</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="{% static 'trigger_3/css/styles.css' %}">
+  <title>Daftar Penggalangan</title>
 </head>
 
 <body>
-	<h1>Halaman Daftar Penggalangan Dana (POV Pengguna)</h1>
-	<table>
-		<tr>
-			<th>ID</th>
-			<th>Judul</th>
-			<th>Kota</th>
-			<th>Prov.</th>
-			<th>Tanggal Berakhir</th>
-			<th>Sisa Hari</th>
-			<th>Target Dana</th>
-			<th>Kategori</th>
-			<th>Action</th>
-		</tr>
-		{% for p in penggalangans %}
-		<tr>
-			<td>{{ p.id }}</td>
-			<td>{{ p.judul }}</td>
-			<td>{{ p.kota }}</td>
-			<td>{{ p.provinsi }}</td>
-			<td>{{ p.tanggalaktifakhir }}</td>
-			<td>{{ p.sisahari }}</td>
-			<td>{{ p.jumlahdibutuhkan }}</td>
-			<td>{{ p.namakategori }}</td>
-			<td>
-				<button>
-					Detail
-				</button>
-				<button>
-					Donasi
-				</button>
-				<button>
-					Tambah ke Wishlist
-				</button>
-			</td>
-		</tr>
-		{% endfor %}
-	</table>
+  <h1>Halaman Daftar Penggalangan Dana (POV Pengguna)</h1>
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Judul</th>
+      <th>Kota</th>
+      <th>Prov.</th>
+      <th>Tanggal Berakhir</th>
+      <th>Sisa Hari</th>
+      <th>Target Dana</th>
+      <th>Kategori</th>
+      <th>Action</th>
+    </tr>
+    {% for p in penggalangans %}
+    <tr id="row_{{ p.id }}">
+      <td id="id_{{ p.id }}">{{ p.id }}</td>
+      <td id="judul_{{ p.id }}">{{ p.judul }}</td>
+      <td id="kota_{{ p.id }}">{{ p.kota }}</td>
+      <td id="provinsi_{{ p.id }}">{{ p.provinsi }}</td>
+      <td id="tanggalaktifakhir_{{ p.id }}">{{ p.tanggalaktifakhir }}</td>
+      <td id="sisahari_{{ p.id }}">{{ p.sisahari }}</td>
+      <td id="jumlahdibutuhkan_{{ p.id }}">{{ p.jumlahdibutuhkan }}</td>
+      <td id="namakategori_{{ p.id }}">{{ p.namakategori }}</td>
+      <td>
+        <button class="detail_button" id="detail_button_{{ p.id }}">
+          Detail
+        </button>
+        <button class="donasi_button" id="donasi_button_{{ p.id }}">
+          Donasi
+        </button>
+        <button class="wishlist_button" id="wishlist_button_{{ p.id }}">
+          Tambah ke Wishlist
+        </button>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  <script src="{% static 'trigger_3/js/daftar_penggalangan.js' %}" type="text/javascript"></script>
 </body>
 
 </html>

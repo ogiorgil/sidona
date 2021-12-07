@@ -35,9 +35,63 @@ def form_verifikasi_penggalangan(request):
     return render(request, "form_verifikasi_penggalangan.html")
 
 
-def detail_penggalangan_pengguna_pov(request):
-    response = {"kategori": "Kesehatan"}
-    return render(request, "pengguna_pov_detail_penggalangan.html", response)
+def detail_penggalangan(request):
+    context = dict()
+    id_penggalangan = request.GET.get("id")
+    data = query(
+        f"""SELECT p.id, p.emailuser, p.judul, p.deskripsi, p.kota, p.provinsi, p.tanggalaktifakhir, p.jumlahdibutuhkan, p.statusverifikasi, emailadmin,
+        k.namakategori, p.linkrepo, p.jumlahterkumpul, p.jumlahterpakai
+        FROM penggalangan_dana_pd p JOIN kategori_pd k ON p.idkategori=k.id
+        WHERE p.id='{id_penggalangan}'"""
+    )
+    context["p"] = data[0]
+
+    catatans = query(
+        f"""SELECT informasi
+        FROM catatan_pengajuan 
+        WHERE idpd='{id_penggalangan}'"""
+    )
+    context["catatans"] = catatans
+
+    donasis = query(
+        f"""SELECT email, timestamp, nominal, doa
+        FROM donasi
+        WHERE idpd='{id_penggalangan}'"""
+    )
+    context["donasis"] = donasis
+
+    penggunaan_danas = query(
+        f"""SELECT timestamp, nominal, deskripsi
+        FROM riwayat_penggunaan_dana
+        WHERE idpd='{id_penggalangan}'"""
+    )
+    context["penggunaan_danas"] = penggunaan_danas
+
+    if data[0].namakategori == "Kesehatan":
+        data_pasien = query(
+            f"""SELECT p.nik, p.nama, pk.penyakit
+            FROM pd_kesehatan pk JOIN pasien p ON pk.idpasien=p.nik
+            WHERE pk.idpd='{id_penggalangan}'"""
+        )
+        print(data_pasien)
+        context["pasien"] = data_pasien[0]
+        komorbid = query(
+            f"""SELECT komorbid FROM komorbid
+            WHERE idpd='{id_penggalangan}'"""
+        )
+        print(komorbid)
+        context["komorbid"] = komorbid
+    if data[0].namakategori == "Rumah Ibadah":
+        data_rumah_ibadah = query(
+            f"""SELECT p.idrumahibadah, k.nama as kategori
+            FROM pd_rumah_ibadah p JOIN kategori_aktivitas_pd_rumah_ibadah k
+            ON p.idaktivitas=k.id
+            WHERE idpd='{id_penggalangan}'"""
+        )
+        print(data_rumah_ibadah)
+        context["rumah_ibadah"] = data_rumah_ibadah[0]
+    print(context)
+    return render(request, "detail_penggalangan.html", context)
 
 
 @csrf_exempt
