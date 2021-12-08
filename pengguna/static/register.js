@@ -15,7 +15,7 @@ const setPdRequired = (isRequired) => {
   $("#pdAlamatInput").prop("required", isRequired);
   $("#pdNamaBankInput").prop("required", isRequired);
   $("#pdNomorRekeningInput").prop("required", isRequired);
-}
+};
 
 const setIndividuRequired = (isRequired) => {
   $("#pdiNikInput").prop("required", isRequired);

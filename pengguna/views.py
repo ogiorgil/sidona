@@ -14,13 +14,16 @@ def is_authenticated(request):
 
 
 def get_role(email, password):
-    admin_query = query(f"SELECT email FROM ADMIN WHERE email = '{email}' AND password = '{password}'")
+    admin_query = query(
+        f"SELECT email FROM ADMIN WHERE email = '{email}' AND password = '{password}'")
     if type(admin_query) == list and len(admin_query):
         return "admin"
 
-    pd_query = query(f"SELECT email FROM PENGGALANG_DANA WHERE email = '{email}' AND password = '{password}'")
+    pd_query = query(
+        f"SELECT email FROM PENGGALANG_DANA WHERE email = '{email}' AND password = '{password}'")
     if type(pd_query) == list and len(pd_query):
-        individu_query = query(f"SELECT email FROM INDIVIDU WHERE email = '{email}'")
+        individu_query = query(
+            f"SELECT email FROM INDIVIDU WHERE email = '{email}'")
         if type(individu_query) == list and len(individu_query):
             return "individu"
         else:
