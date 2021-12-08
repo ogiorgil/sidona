@@ -1,142 +1,144 @@
 {% load static %}
 
 <head>
-  <title>Register</title>
-
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
   <link rel="stylesheet" type="text/css" href="{% static 'register.css' %}" />
   <script src="{% static 'register.js' %}"></script>
+  <title>Register</title>
 </head>
 
 <body>
   <h1>Form Register</h1>
 
-  <div class="form" id="jenisAkunSection">
-    <h2>Jenis Akun</h2>
-    <select id="jenisAkunSelect">
-      <option>Admin</option>
-      <option>Penggalang Dana</option>
-    </select>
+  <form method="POST">
+    <div class="form" id="jenisAkunSection">
+      <h2>Jenis Akun</h2>
 
-    <br />
-    <br />
-    <br />
-    <button id="jenisAkunButton">Pilih</button>
-  </div>
+      <select id="jenisAkunSelect" name="role1">
+        <option value="admin">Admin</option>
+        <option value="pd">Penggalang Dana</option>
+      </select>
 
-  <hr />
+      <br />
+      <button id="jenisAkunButton" type="button">Pilih</button>
+    </div>
 
-  <div class="form" id="adminSection">
-    <h2>Form Pendaftaran Admin</h2>
+    <hr />
 
-    <label for="adminEmailInput">Email</label>
-    <input id="adminEmailInput" placeholder="Email" />
+    <div class="form" id="adminSection">
+      <h2>Form Pendaftaran Admin</h2>
 
-    <br />
-    <label for="adminPasswordInput">Password</label>
-    <input id="adminPasswordInput" placeholder="Password" />
+      <label for="adminEmailInput">Email</label>
+      <input id="adminEmailInput" name="adminEmailInput" type="email" placeholder="Email" />
 
-    <br />
-    <label for="adminNamaInput">Nama</label>
-    <input id="adminNamaInput" placeholder="Nama" />
+      <br />
+      <label for="adminPasswordInput">Password</label>
+      <input id="adminPasswordInput" name="adminPasswordInput" type="password" placeholder="Password" />
 
-    <br />
-    <label for="adminNoHpInput">Nomor HP</label>
-    <input id="adminNoHpInput" placeholder="Nomor HP" />
+      <br />
+      <label for="adminNamaInput">Nama</label>
+      <input id="adminNamaInput" name="adminNamaInput" placeholder="Nama" />
 
-    <br />
-    <button id="adminButton">Daftar</button>
-  </div>
+      <br />
+      <label for="adminNoHpInput">Nomor HP</label>
+      <input id="adminNoHpInput" name="adminNoHpInput" type="tel" placeholder="Nomor HP" />
 
-  <div class="form" id="pdSection">
-    <h2>Form Pendaftaran Penggalang Dana</h2>
+      <br />
+      <input id="adminButton" type="submit" value="Register" />
+    </div>
 
-    <label for="pdEmailInput">Email</label>
-    <input id="pdEmailInput" placeholder="Email" />
+    <div class="form" id="pdSection">
+      <h2>Form Pendaftaran Penggalang Dana</h2>
 
-    <br />
-    <label for="pdPasswordInput">Password</label>
-    <input id="pdPasswordInput" placeholder="Password" />
+      <label for="pdEmailInput">Email</label>
+      <input id="pdEmailInput" name="pdEmailInput" type="email" placeholder="Email" />
 
-    <br />
-    <label for="pdNamaInput">Nama</label>
-    <input id="pdNamaInput" placeholder="Nama" />
+      <br />
+      <label for="pdPasswordInput">Password</label>
+      <input id="pdPasswordInput" name="pdPasswordInput" type="password" placeholder="Password" />
 
-    <br />
-    <label for="pdNoHpInput">Nomor HP</label>
-    <input id="pdNoHpInput" placeholder="Nomor HP" />
+      <br />
+      <label for="pdNamaInput">Nama</label>
+      <input id="pdNamaInput" name="pdNamaInput" placeholder="Nama" />
 
-    <br />
-    <label for="pdAlamatInput">Alamat</label>
-    <input id="pdAlamatInput" placeholder="Alamat" />
+      <br />
+      <label for="pdNoHpInput">Nomor HP</label>
+      <input id="pdNoHpInput" name="pdNoHpInput" type="tel" placeholder="Nomor HP" />
 
-    <br />
-    <label for="pdNamaBankInput">Nama Bank</label>
-    <input id="pdNamaBankInput" placeholder="Nama Bank" />
+      <br />
+      <label for="pdAlamatInput">Alamat</label>
+      <input id="pdAlamatInput" name="pdAlamatInput" placeholder="Alamat" />
 
-    <br />
-    <label for="pdNomorRekeningInput">Nomor Rekening</label>
-    <input id="pdNomorRekeningInput" placeholder="Nomor Rekening" />
+      <br />
+      <label for="pdNamaBankInput">Nama Bank</label>
+      <input id="pdNamaBankInput" name="pdNamaBankInput" placeholder="Nama Bank" />
 
-    <br />
-    <h2>Jenis Penggalang Dana</h2>
-    <select id="pdJenisSelect">
-      <option>Individu</option>
-      <option>Organisasi</option>
-    </select>
+      <br />
+      <label for="pdNomorRekeningInput">Nomor Rekening</label>
+      <input id="pdNomorRekeningInput" name="pdNomorRekeningInput" type="number" placeholder="Nomor Rekening" />
 
-    <br />
-    <button id="pdButton">Pilih</button>
-  </div>
+      <br />
+      <h2>Jenis Penggalang Dana</h2>
+      <select id="pdJenisSelect" name="role2">
+        <option value="individu">Individu</option>
+        <option value="organisasi">Organisasi</option>
+      </select>
 
-  {% comment %} Penggalang Dana Individu (PDI) {% endcomment %}
-  <div class="form" id="pdiSection">
-    <h2>Form Pendaftaran Penggalang Dana Individu</h2>
+      <br />
+      <button id="pdButton" type="button">Pilih</button>
+    </div>
 
-    <label for="pdiNikInput">NIK</label>
-    <input id="pdiNikInput" placeholder="NIK" />
+    {% comment %} Penggalang Dana Individu (PDI) {% endcomment %}
+    <div class="form" id="pdiSection">
+      <h2>Form Pendaftaran Penggalang Dana Individu</h2>
 
-    <br />
-    <label for="pdiTanggalLahirInput">Tanggal Lahir</label>
-    <input id="pdiTanggalLahirInput" placeholder="Tanggal Lahir" />
+      <label for="pdiNikInput">NIK</label>
+      <input id="pdiNikInput" name="pdiNikInput" type="number" placeholder="NIK" />
 
-    <br />
-    <label for="pdiJenisKelaminInput">Jenis Kelamin</label>
-    <input id="pdiJenisKelaminInput" placeholder="Jenis Kelamin" />
+      <br />
+      <label for="pdiTanggalLahirInput">Tanggal Lahir</label>
+      <input id="pdiTanggalLahirInput" name="pdiTanggalLahirInput" type="date" placeholder="Tanggal Lahir" />
 
-    <br />
-    <label for="pdiKtpInput">Foto KTP</label>
-    <input id="pdiKtpInput" placeholder="Foto KTP" />
+      <br />
+      <label for="pdiJenisKelaminInput">Jenis Kelamin</label>
+      <select id="pdiJenisKelaminInput" name="pdiJenisKelaminInput">
+        <option value="M">Laki-laki</option>
+        <option value="F">Perempuan</option>
+      </select>
 
-    <br />
-    <button id="pdiButton">Daftar</button>
-  </div>
+      <br />
+      <label for="pdiKtpInput">Foto KTP</label>
+      <input id="pdiKtpInput" name="pdiKtpInput" placeholder="Foto KTP" />
 
-  {% comment %} Penggalang Dana Organisasi (PDO) {% endcomment %}
-  <div class="form" id="pdoSection">
-    <h2>Form Pendaftaran Penggalang Dana Organisasi</h2>
+      <br />
+      <input id="pdiButton" type="submit" value="Register" />
+    </div>
 
-    <label for="pdoNamaInput">Nama Organisasi</label>
-    <input id="pdoNamaInput" placeholder="Nama Organisasi" />
+    {% comment %} Penggalang Dana Organisasi (PDO) {% endcomment %}
+    <div class="form" id="pdoSection">
+      <h2>Form Pendaftaran Penggalang Dana Organisasi</h2>
 
-    <br />
-    <label for="pdoNoTelpInput">Nomor Telepon Organisasi</label>
-    <input id="pdoNoTelpInput" placeholder="Nomor Telepon Organisasi" />
+      <label for="pdoNamaInput">Nama Organisasi</label>
+      <input id="pdoNamaInput" name="pdoNamaInput" placeholder="Nama Organisasi" />
 
-    <br />
-    <label for="pdoTahunInput">Tahun Berdiri</label>
-    <input id="pdoTahunInput" placeholder="Tahun Berdiri" />
+      <br />
+      <label for="pdoNoTelpInput">Nomor Telepon Organisasi</label>
+      <input id="pdoNoTelpInput" name="pdoNoTelpInput" type="tel" placeholder="Nomor Telepon Organisasi" />
 
-    <br />
-    <label for="pdoNomorAktaInput">Nomor Akta Pendirian</label>
-    <input id="pdoNomorAktaInput" placeholder="Nomor Akta Pendirian" />
+      <br />
+      <label for="pdoTahunInput">Tahun Berdiri</label>
+      <input id="pdoTahunInput" name="pdoTahunInput" type="number" placeholder="Tahun Berdiri" />
 
-    <br />
-    <label for="pdoFotoAktaInput">Foto Akta Pendirian</label>
-    <input id="pdoFotoAktaInput" placeholder="Foto Akta Pendirian" />
+      <br />
+      <label for="pdoNomorAktaInput">Nomor Akta Pendirian</label>
+      <input id="pdoNomorAktaInput" name="pdoNomorAktaInput" placeholder="Nomor Akta Pendirian" />
 
-    <br />
-    <button id="pdoButton">Daftar</button>
-  </div>
+      <br />
+      <label for="pdoFotoAktaInput">Foto Akta Pendirian</label>
+      <input id="pdoFotoAktaInput" name="pdoFotoAktaInput" placeholder="Foto Akta Pendirian" />
+
+      <br />
+      <input id="pdoButton" type="submit" value="Register" />
+    </div>
+  </form>
 </body>
