@@ -67,6 +67,15 @@ def login_view(request):
     return render(request, "login.html")
 
 
+def logout(request):
+    if not is_authenticated(request):
+        return redirect("/t3/daftar-penggalangan")
+
+    request.session.flush()
+    request.session.clear_expired()
+    return redirect("/t3/daftar-penggalangan")
+
+
 def register_view(request):
     return render(request, "register.html")
 
