@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,12 +22,12 @@ table, th, td {
   </tr>
   <tr>
     {% for d in donasi %}
-    <td>{{ d.id }}</td>
+    <td>{{ d.idpd }}</td>
     <td>{{ d.judul }}</td>
     <td>{{ d.namakategori }}</td>
     <td>{{d.status }}</td>
      <td>
-      <button class="detail_button" id="detail_button_{{ d.email }}_{{d.timestamp}}">
+      <button class="detail_button" id="{{ d.email }}_{{d.timestamp}}">
         Detail
       </button>
     <button type="button">Lihat Bukti</button></td>
@@ -34,6 +35,17 @@ table, th, td {
  </tr>
  </table>
 
+ <script>
+   var detailButtons = document.getElementsByClassName("detail_button");
+[].slice.call(detailButtons).forEach(function (button) {
+    button.onclick = function () {
+        let email_pengguna = button.id.split('_')[0];
+        let timestamp = button.id.split('_')[1];
+        console.log(button.id) ;
+        location.href = "/t4/detail-donasi/?email=" + email_pengguna +"&timestamp="+timestamp;
+    };
+});
 
+ </script>
 </body>
 </html>

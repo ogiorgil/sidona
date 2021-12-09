@@ -5,22 +5,23 @@
 <h2 text align =Center>Form Pembuatan Donasi</h2>
 
 
-<form action="/action_page.php">
+<form method="POST">
 
 	<li>
       <label for="email_donatur">Email Donatur: </label>
-			<input id="formdonasi" value="jsimony2@skyrock.com" disabled />
+			<input id="formdonasi" name="emaildonatur" value="{{d.email}}" disabled />
   </li>
     <br>
 	<li> <label for="Timestamp">Timestamp: </label>
-    <input id="form_timestamp_donasi" value="2021-11-16" type="date" disabled></li></li>
+    <input id="timestamp" type="datetime-local" name="timestamp" value="2000-07-01T12:00" step=1 hidden>
     <br>
 	<li>
     <label for="judul">Judul Penggalangan Dana: </label>
-  <input id="form_judul" value="Ayo bantu Zulfahri menghadapi penyakit Demam Berdarahnya!" type="text" disabled >
+  <input id="form_judul" name = "judul" value="{{d.judul}}" type="text" disabled >
   </li>
     <br>
-  	<li><label for="fname">Nominal (Rupiah)</label> <input type="text" id="fname" name="fname"><br></li>
+  	<li><label for="fname">Nominal (Rupiah)</label>  <input name="nominal" id="nominaldonasi" type="text" required> <br>
+     </li>
     <br>
   	<li>
       Metode Bayar:<br>
@@ -30,16 +31,20 @@
         <label for="Gopay">Gopay</label><br>
      </li>
     <br>
-   	<li>Status Anonim:
+   	<li>Status Anonim: <br>
       <input type="radio" id="ya" name="opsi" value="ya">
       <label for="ya">Ya</label><br>
       <input type="radio" id="tidak" name="opsi" value="tidak">
       <label for="tidak">Tidak</label><br>
      </li>
     <br>
-    <li><label for="fname">Doa</label> <input type="text"id="fname" name="fname"><br></li>
+    <li><label for="doa">Doa</label> <input type="text"id="doa" name="doa"><br></li>
     <br>
-  	<input type="submit" value="Create">
+  	
+    <button class="padded-button">
+      Create
+    </button>
+    
 
 </form> 
 
