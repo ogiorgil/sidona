@@ -91,15 +91,15 @@ tr:hover {background-color: #D6EEEE;}
     <td id="judul_{{ p.id }}">{{ w.judul }}</td>
     <td id="namakategori_{{ p.id }}">{{ w.namakategori}}</td>
     <td>
-      <button class="detail_button" id="detail_button_{{ p.id }}">
+      <button class="detail_button" id="{{w.idpd}}">
         Detail
       </button>
-      <button class="donasi_button" id="donasi_button_{{ p.id }}">
+      <button class="donasi_button" id="donasi_button_{{ w.id }}">
         Donasi
       </button>
  
       <form method="POST" action="/t4/delete-wishlist/">
-        <input name="id" value="{{ w.id }}" hidden />
+        <input name="id" value="{{ w.idpd }}" hidden />
         <input type="submit" value="Delete" />
     </form>
     
@@ -111,6 +111,18 @@ tr:hover {background-color: #D6EEEE;}
 
 <button>Cancel</button>
 </div>
+<script>
+  var detailButtons = document.getElementsByClassName("detail_button");
+[].slice.call(detailButtons).forEach(function (button) {
+    button.onclick = function () {
+        let id_penggalangan = button.id;
+        console.log(id_penggalangan) ;
+        // location.href = "t3/detail-penggalangan?id=" + id_penggalangan;
+        location.href = "/detail-penggalangan?id=" + id_penggalangan;
+    };
+});
+
+</script>
 </body>
 </html>
 

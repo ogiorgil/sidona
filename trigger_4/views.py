@@ -28,7 +28,7 @@ def form_create_donasi(request):
         return HttpResponse("Hanya individu yang bisa berdonasi")
 
     context = dict()
-    # //id_penggalangan = request.GET.get("id")
+    id_penggalangan = request.GET.get("id")
     email = request.session['email']
     if request.method == "POST":
         print("halo")
@@ -60,11 +60,13 @@ def form_create_donasi(request):
       
         # query_str = f"INSERT INTO donasi VALUES ('{email}', '{timestamp}',{nominal},'{metode_bayar}','{opsi2}','{doa}','{id_penggalangan}','{idstatuspembayaran}')"
         # print(query(query_str))
+        # query_str = query(f"""
+        # INSERT INTO donasi VALUES
+        # ('{email}','{timestamp}',{nominal},'{metode_bayar}','{opsi2}','{doa}','{id_penggalangan}','{idstatuspembayaran}')
+        # """)
 
-        query_str = query(f"""
-        INSERT INTO donasi VALUES
-        ('{email}','{timestamp}',{nominal},'{metode_bayar}','{opsi2}','{doa}','{id_penggalangan}','{idstatuspembayaran}')
-        """)
+        query_str = f"INSERT INTO donasi (email, timestamp,nominal,metodebayar,statusanonim,doa,idpd,idstatuspembayaran) VALUES ('{email}', '{timestamp}',{nominal},'{metode_bayar}','{opsi2}','{doa}','{id_penggalangan}','{idstatuspembayaran}')"
+        print(query(query_str))
 
         if not type(query_str) == int:
             return HttpResponse("Anda gagal create!")
@@ -107,6 +109,7 @@ def profil_pengguna(request):
         from penggalang_dana p, individu i
         where p.email ='{email}' and i.email = p.email """
     )
+    
     context["p"] = data[0]
     print(data)
 
