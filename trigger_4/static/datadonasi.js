@@ -6,3 +6,4 @@ var detailButtons = document.getElementsByClassName("detail_button");
         location.href = "/detail-donasi?email=" + email_pengguna +"&timestamp="+timestamp;
     };
 });
+

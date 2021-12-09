@@ -2,6 +2,8 @@ from django.shortcuts import render
 from utils.query import query
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
+from pengguna.views import is_authenticated
 
 # Create your views here.
 # def data_donasi(request):
@@ -22,9 +24,14 @@ def daftar_penggalangan_pengguna_pov(request):
     return render(request, "penggalangandana.html")
 
 def profil_pengguna(request):
-    return render(request, "profilpengguna.html")
+    if not is_authenticated(request):
+        return redirect("/auth/login?next=/t4/profil-pengguna")
+    
+    if request.session["role"] == "admin":
+        return HttpResponse("Admin tidak mempunyai profil")
 
-def data_donasi(request):
+    email = request.session['email']
+    # ntar pas di query select berdasarkan email sessionnya
     data = query(
         """select d.idpd, pdd.judul, k.namakategori,s.status,d.email,d.timestamp
         from penggalangan_dana_pd pdd
@@ -34,8 +41,25 @@ def data_donasi(request):
     )
     print("DATA: " + str(data))
     argument = {"donasi": data}
-    return render(request, "datadonasi.html", argument)
+    return render(request, "profilpengguna.html", argument)
+  
 
+def data_donasi(request):
+    # harus tau email si pengguna
+    email = request.session['email']
+
+    # tampilin semua donasi yang pernah dia buat
+    data = query(
+        """select d.idpd, pdd.judul, k.namakategori,s.status,d.email,d.timestamp
+        from penggalangan_dana_pd pdd
+        join kategori_pd k on pdd.idkategori = k.id
+        join donasi d on pdd.id = d.idpd
+        join status_pembayaran s on d.idstatuspembayaran=s.id
+        where d.email = '{email}'"""
+    )
+    print("DATA: " + str(data))
+    argument = {"donasi": data}
+    return render(request, "datadonasi.html", argument)
 
 
 def detail_donasi_pengguna_pov(request):
