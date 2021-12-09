@@ -64,3 +64,16 @@ def data_donasi(request):
 
 def detail_donasi_pengguna_pov(request):
     return render(request, "detaildonasi.html")
+
+def detail_penggalangan(request):
+    context = dict()
+    email_pengguna = request.GET.get("email")
+    timestamp = request.GET.get("timestamp")
+ 
+    data = query(
+        f"""select d.email,d.timestamp, pdd.judul,d.nominal, d.metodebayar, d.statusanonim, d.doa
+        from donasi d, penggalangan_dana_pd pdd
+        where d.email = '{email_pengguna}' and d.timestamp = '{timestamp}' and d.idpd = pdd.id"""
+    )
+    context["p"] = data[0]
+    return render(request, "detaildonasi.html", context)
