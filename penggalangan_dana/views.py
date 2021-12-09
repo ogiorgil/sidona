@@ -5,10 +5,6 @@ from pengguna.views import get_session_data, is_authenticated
 from utils.query import query
 
 
-def create_pd(request):
-    return render(request, "create_pd.html")
-
-
 def read_pd(request):
     if not is_authenticated(request):
         return redirect("/auth/login?next=/pd")
@@ -55,6 +51,11 @@ def read_pd_details(request):
         return HttpResponse("Penggalangan Dana does not exists!")
 
     penggalangan_dana = penggalangan_dana[0]
+
+    # Current user is not the owner
+    if penggalangan_dana.emailuser != session["email"]:
+        return HttpResponse("You are not authorized to view this Penggalangan Dana!")
+
     data = {"penggalangan_dana": penggalangan_dana}
 
     if penggalangan_dana.namakategori == "Kesehatan":
@@ -89,4 +90,16 @@ def read_pd_details(request):
 
         data["rumah_ibadah"] = rumah_ibadah[0]
 
+    donasi = query(f"""
+        SELECT d.email, d.timestamp, d.nominal, d.doa
+        FROM penggalangan_dana_pd AS pdpd, donasi AS d
+        WHERE pdpd.id = d.idpd
+    """)
+
+    data["donasi"] = donasi
+
     return render(request, "read_pd_details.html", data)
+
+
+def create_pd(request):
+    return render(request, "create_pd.html")

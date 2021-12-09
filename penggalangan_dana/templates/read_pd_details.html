@@ -85,6 +85,7 @@
   <b>Jumlah Terkumpul:</b>
   <p>{{ penggalangan_dana.jumlahterkumpul }}</p>
 
+  <b>Donasi:</b><br />
   <table>
     <tr>
       <th>Email</th>
@@ -92,14 +93,23 @@
       <th>Nominal</th>
       <th>Doa</th>
     </tr>
-    <tr>
+
+    {% for d in donasi %}
+      <tr>
+        <th>{{ d.email }}</th>
+        <th>{{ d.timestamp }}</th>
+        <th>{{ d.nominal }}</th>
+        <th>{{ d.doa }}</th>
+      </tr>
+    {% empty %}
       <th>-</th>
       <th>-</th>
       <th>-</th>
       <th>-</th>
-    </tr>
+    {% endfor %}
   </table>
 
+  <br />
   <b>Jumlah Terpakai:</b>
   <p>{{ penggalangan_dana.jumlahterpakai }}</p>
 
