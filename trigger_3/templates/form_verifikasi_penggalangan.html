@@ -10,25 +10,38 @@
 </head>
 
 <body>
-	<div style="display: table;">
-		<div class="div-row">
-			<h1>Form Verifikasi Penggalangan Dana</h1>
+	<form method="post">
+		<div style="display: table;">
+			<div class="div-row">
+				<h1>Form Verifikasi Penggalangan Dana</h1>
+			</div>
+			<div class="div-row">
+				<label for="catatan_pengajuan">Catatan Pengajuan: </label>
+			</div>
+			<div style="display: table-row;">
+				<input name="id" id="form_id" value="{{ id }}" hidden>
+				<input id="timestamp" type="datetime-local" name="timestamp" value="2000-07-01T12:00" step=1 hidden>
+				<textarea name="catatan" id="form_catatan_pengajuan" cols="40" rows="5" required></textarea>
+			</div>
+			<div class="div-row">
+				<button class="padded-button" type="submit" name="action" value="true">
+					VERIFIKASI
+				</button>
+				<button class="padded-button" type="submit" name="action" value="false">
+					TOLAK VERIFIKASI
+				</button>
+			</div>
 		</div>
-		<div class="div-row">
-			<label for="catatan_pengajuan">Catatan Pengajuan: </label>
-		</div>
-		<div style="display: table-row" ;>
-			<textarea id="form_catatan_pengajuan" cols="40" rows="5"></textarea>
-		</div>
-		<div class="div-row">
-			<button class="padded-button">
-				VERIFIKASI
-			</button>
-			<button class="padded-button">
-				TOLAK VERIFIKASI
-			</button>
-		</div>
-	</div>
+	</form>
+
+	<script type="text/javascript">
+		window.addEventListener('load', () => {
+			var tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
+			var localISOTime = (new Date(Date.now() - tzoffset)).toISOString().slice(0, -1);
+			var localISOTimeSeconds = localISOTime.slice(0, 19);
+			document.getElementById('timestamp').value = localISOTimeSeconds;
+		});
+	</script>
 </body>
 
 </html>
