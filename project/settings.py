@@ -11,7 +11,7 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 SECRET_KEY = "%ppjxiq8eyx=rj(0s(rzgziq&f@h0i!@gi1v1f2pw@yi4+an%0"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = "DATABASE_URL" in os.environ
+DEBUG = True
 
 
 # Application definition
