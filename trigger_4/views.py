@@ -50,12 +50,12 @@ def data_donasi(request):
 
     # tampilin semua donasi yang pernah dia buat
     data = query(
-        """select d.idpd, pdd.judul, k.namakategori,s.status,d.email,d.timestamp
+        f"""select d.idpd, pdd.judul, k.namakategori,s.status,d.email,d.timestamp
         from penggalangan_dana_pd pdd
         join kategori_pd k on pdd.idkategori = k.id
         join donasi d on pdd.id = d.idpd
         join status_pembayaran s on d.idstatuspembayaran=s.id
-        where d.email = '{email}'"""
+        where d.email = '{ email }' """
     )
     print("DATA: " + str(data))
     argument = {"donasi": data}
