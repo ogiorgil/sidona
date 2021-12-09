@@ -20,15 +20,17 @@ table, th, td {
     <th>Action</th>
   </tr>
   <tr>
-    <td>K-001 </td>
-    <td>Ayo bantu Zulfahri menghadapi
-penyakit Demam Berdarahnya!</td>
-    <td>Kesehatan</td>
-    <td>Sukses</td>
-     <td><form action="/t4/detail-donasi/">
-      <input type="submit" value="Detail" />
-  </form>
+    {% for d in donasi %}
+    <td>{{ d.id }}</td>
+    <td>{{ d.judul }}</td>
+    <td>{{ d.namakategori }}</td>
+    <td>{{d.status }}</td>
+     <td>
+      <button class="detail_button" id="detail_button_{{ d.email }}_{{d.timestamp}}">
+        Detail
+      </button>
     <button type="button">Lihat Bukti</button></td>
+    {% endfor %}
  </tr>
  </table>
 
