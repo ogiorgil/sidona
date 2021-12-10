@@ -3,6 +3,7 @@ from utils.query import query
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse, HttpResponseRedirect
 from pengguna.views import is_authenticated
+from datetime import datetime
 
 # Create your views here.
 # def data_donasi(request):
@@ -14,8 +15,8 @@ def detail_penggalangan_pengguna_pov(request):
     return render(request, "detail_penggalangan_dana.html", response)
 
 
-def form_create_donasi(request):
-    return render(request, "formdonasi.html")
+# def form_create_donasi(request):
+#     return render(request, "formdonasi.html")
 
 
 @csrf_exempt
@@ -31,10 +32,9 @@ def form_create_donasi(request):
     id_penggalangan = request.GET.get("id")
     email = request.session['email']
     if request.method == "POST":
-        print("halo")
+        print(request.POST)
         print(email)
-        # body = request.POST
-        timestamp = request.POST.get('timestamp', False)
+        timestamp = request.POST.get('timestamp')
         print(timestamp)
         nominal = request.POST.get('nominal', False)
         print(nominal)
@@ -57,21 +57,12 @@ def form_create_donasi(request):
         print(opsi2)
         print(doa)
         
-      
-        # query_str = f"INSERT INTO donasi VALUES ('{email}', '{timestamp}',{nominal},'{metode_bayar}','{opsi2}','{doa}','{id_penggalangan}','{idstatuspembayaran}')"
-        # print(query(query_str))
-        # query_str = query(f"""
-        # INSERT INTO donasi VALUES
-        # ('{email}','{timestamp}',{nominal},'{metode_bayar}','{opsi2}','{doa}','{id_penggalangan}','{idstatuspembayaran}')
-        # """)
-
-        query_str = f"INSERT INTO donasi (email, timestamp,nominal,metodebayar,statusanonim,doa,idpd,idstatuspembayaran) VALUES ('{email}', '{timestamp}',{nominal},'{metode_bayar}','{opsi2}','{doa}','{id_penggalangan}','{idstatuspembayaran}')"
+        query_str = f"INSERT INTO donasi VALUES ('{email}', '{timestamp}',{nominal},'{metode_bayar}','{opsi2}','{doa}','{id_penggalangan}','{idstatuspembayaran}')"
+        # (email, timestamp,nominal,metodebayar,statusanonim,doa,idpd,idstatuspembayaran) 
         print(query(query_str))
 
-        if not type(query_str) == int:
-            return HttpResponse("Anda gagal create!")
-
-        print(query_str)
+    
+        # //print(query_str)
 
         return HttpResponseRedirect("/t4/data-donasi/")
     
@@ -84,10 +75,6 @@ def form_create_donasi(request):
         print(data)
         context["d"] = data[0]
         return render(request, "formdonasi.html", context)
-
-
-def detail_donasi_pengguna_pov(request):
-    return render(request, "detaildonasi.html")
 
 
 def daftar_penggalangan_pengguna_pov(request):
@@ -150,14 +137,17 @@ def detail_donasi_pengguna_pov(request):
     context = dict()
     email_pengguna = request.GET.get("email")
     timestamp = request.GET.get("timestamp")
+    # datetimeObj = datetime.strptime(timestamp, '%Y-%m-%dT%H::%M::%S.%f')
     print(email_pengguna)
     print(timestamp)
     data = query(
         f"""select d.email,d.timestamp, pdd.judul,d.nominal, d.metodebayar, d.statusanonim, d.doa
         from donasi d, penggalangan_dana_pd pdd
-        where d.email = '{email_pengguna}' and d.idpd = pdd.id"""
+        where d.email = '{email_pengguna}' and d.timestamp ='{timestamp}' and d.idpd = pdd.id"""
     )
+    print(data)
     context["d"] = data[0]
+    
     return render(request, "detaildonasi.html", context)
 
 

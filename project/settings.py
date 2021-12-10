@@ -126,6 +126,8 @@ STATICFILES_DIRS = [
 # https://warehouse.python.org/project/whitenoise/
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
+USE_L10N = False                 # At first, disable USE_L10N, because it overrides the format
+DATETIME_FORMAT = 'Y-m-d H:i:s'
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())

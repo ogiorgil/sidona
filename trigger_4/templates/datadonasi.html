@@ -20,8 +20,8 @@ table, th, td {
     <th>Status Pembayaran</th>
     <th>Action</th>
   </tr>
+  {% for d in donasi %}
   <tr>
-    {% for d in donasi %}
     <td>{{ d.idpd }}</td>
     <td>{{ d.judul }}</td>
     <td>{{ d.namakategori }}</td>
@@ -31,8 +31,8 @@ table, th, td {
         Detail
       </button>
     <button type="button">Lihat Bukti</button></td>
-    {% endfor %}
  </tr>
+ {% endfor %}
  </table>
 
  <script>

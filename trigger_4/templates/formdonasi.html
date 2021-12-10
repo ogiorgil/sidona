@@ -13,7 +13,7 @@
   </li>
     <br>
 	<li> <label for="Timestamp">Timestamp: </label>
-    <input id="timestamp" type="datetime-local" name="timestamp" value="2000-07-01T12:00" step=1 hidden>
+    <input id="timestamp-input" type="text" name="timestamp">
     <br>
 	<li>
     <label for="judul">Judul Penggalangan Dana: </label>
@@ -47,7 +47,20 @@
     
 
 </form> 
+<script>
+  // document.getElementById("timestamp").value=getTimeStamp() ;
+  var timestampinput = document.getElementById('timestamp-input');
+  timestampinput.value = getTimeStamp() ;
 
+  function getTimeStamp() {
+       var now = new Date();
+       return ((now.getFullYear()) + '-' + (now.getMonth() + 1)  + '-' + now.getDate() + " " + now.getHours() + ':'
+                     + ((now.getMinutes() < 10) ? ("0" + now.getMinutes()) : (now.getMinutes())) + ':' + ((now.getSeconds() < 10) ? ("0" + now
+                     .getSeconds()) : (now.getSeconds())));
+  
+  }
+
+</script>
 
 </body>
 </html>
