@@ -3,9 +3,8 @@
 <head>
   <title>Create Penggalangan Dana</title>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
   <link rel="stylesheet" type="text/css" href="{% static 'pdCreate.css' %}" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="{% static 'pdCreate.js' %}"></script>
 </head>
 
@@ -16,23 +15,20 @@
 
     <label for="kategoriPdSelect">Kategori:</label>
     <select id="kategoriPdSelect">
-      <option value="1">Rumah Ibadah</option>
-      <option value="2">Kesehatan</option>
-      <option value="3">Jembatan</option>
-      <option value="4">Pendidikan</option>
-      <option value="5">Sembako</option>
-      <option value="6">Yatim Piatu</option>
-      <option value="7">Bencana</option>
+      {% for k in kategori %}
+        <option value="{{ k.id }}">{{ k.namakategori }}</option>
+      {% endfor %}
     </select>
 
-    <button id="kategoriPdNextButton">Next</button>
+    <button id="kategoriPdNextButton" type="button">Next</button>
   </div>
 
   <div id="dialogTambahPasien" class="form">
-    <h1>Apakah anda ingin menambahkan pasien?</h1><br />
+    <h1>Apakah anda ingin menambahkan pasien?</h1>
+    <br />
 
-    <button id="yaButton">Ya</button>
-    <button id="tidakButton">Tidak</button>
+    <button id="yaButton" type="button">Ya</button>
+    <button id="tidakButton" type="button">Tidak</button>
   </div>
 
   <div id="formPasien" class="form">
@@ -54,23 +50,25 @@
     <label for="pasienPekerjaanInput">Pekerjaan</label>
     <input id="pasienPekerjaanInput" placeholder="Pekerjaan" />
 
-    <button id="pasienNextButton">Next</button>
+    <button id="pasienNextButton" type="button">Next</button>
   </div>
 
   <div id="cekPasien" class="form">
-    <h1>Cek Pasien yang Terdaftar</h1><br />
+    <h1>Cek Pasien yang Terdaftar</h1>
+    <br />
 
     <label for="cekPasienNikInput">NIK</label>
     <input id="cekPasienNikInput" placeholder="NIK" />
 
-    <button id="cekPasienNextButton">Next</button>
+    <button id="cekPasienNextButton" type="button">Next</button>
   </div>
 
   <div id="dialogTambahRumahIbadah" class="form">
-    <h1>Apakah anda ingin menambahkan rumah ibadah?</h1><br />
+    <h1>Apakah anda ingin menambahkan rumah ibadah?</h1>
+    <br />
 
-    <button id="yaButton">Ya</button>
-    <button id="tidakButton">Tidak</button>
+    <button id="yaButton" type="button">Ya</button>
+    <button id="tidakButton" type="button">Tidak</button>
   </div>
 
   <div id="formRumahIbadah" class="form">
@@ -89,79 +87,104 @@
     <label for="rumahIbadahJenisInput">Jenis</label>
     <input id="rumahIbadahJenisInput" placeholder="Jenis" />
 
-    <button id="rumahIbadahNextButton">Next</button>
+    <button id="rumahIbadahNextButton" type="button">Next</button>
   </div>
 
   <div id="cekRumahIbadah" class="form">
-    <h1>Cek Rumah Ibadah yang Terdaftar</h1><br />
-
-    <label for="cekRumahIbadahSertifikatInput">Nomor Sertifikat Rumah Ibadah</label>
-    <input id="cekRumahIbadahSertifikatInput" placeholder="Nomor Sertifikat Rumah Ibadah" />
-
-    <button id="cekRumahIbadahNextButton">Next</button>
-  </div>
-
-  <div id="formPd" class="form">
-    <h1>Form Penggalangan Dana</h1>
-
-    <b>Informasi Umum Penggalangan Dana</b><br />
-
-    <label for="pdIdInput">ID Penggalangan Dana</label>
-    <input id="pdIdInput" value="K-001" disabled />
-
-    <label for="pdEmailInput">Email Penggalang Dana</label>
-    <input id="pdEmailInput" value="pbarstow0@parallels.com" disabled />
-
-    <label for="pdJudulInput">Judul</label>
-    <input id="pdJudulInput" placeholder="Judul" />
-
-    <label for="pdDeskripsiInput">Deskripsi</label>
-    <input id="pdDeskripsiInput" placeholder="Deskripsi" />
-
-    <label for="pdKotaInput">Kota</label>
-    <input id="pdKotaInput" placeholder="Kota" />
-
-    <label for="pdProvinsiInput">Provinsi</label>
-    <input id="pdProvinsiInput" placeholder="Provinsi" />
-
-    <label for="pdDeadlinePenggalanganDanaInput">Deadline Penggalangan Dana</label>
-    <input id="pdDeadlinePenggalanganDanaInput" placeholder="Deadline Penggalangan Dana" />
-
-    <label for="pdJumlahTargetDanaInput">Jumlah Target Dana</label>
-    <input id="pdJumlahTargetDanaInput" placeholder="Jumlah Target Dana" />
-
+    <h1>Cek Rumah Ibadah yang Terdaftar</h1>
     <br />
-    <b>Informasi Tambahan Penggalangan Dana</b>
 
-    <label for="pdKategoriInput">Kategori</label>
-    <input id="pdKategoriInput" value="Kesehatan" disabled />
+    <label for="cekRumahIbadahSertifikatInput"
+      >Nomor Sertifikat Rumah Ibadah</label
+    >
+    <input
+      id="cekRumahIbadahSertifikatInput"
+      placeholder="Nomor Sertifikat Rumah Ibadah"
+    />
 
-    <div id="formPdKesehatan" class="form">
-      <label for="pdNikPasienInput">NIK Pasien</label>
-      <input id="pdNikPasienInput" value="1497199854621440" disabled />
-
-      <label for="pdNamaPasienInput">Nama Pasien</label>
-      <input id="pdNamaPasienInput" value="Modesty Rickertsen" disabled />
-
-      <label for="pdPenyakitPasienInput">Penyakit Utama</label>
-      <input id="pdPenyakitPasienInput" placeholder="Penyakit Utama" />
-    </div>
-
-    <div id="formPdRumahIbadah" class="form">
-      <label for="pdSertifikatRumahIbadahInput">Nomor Sertifikat Rumah Ibadah</label>
-      <input id="pdSertifikatRumahIbadahInput" value="RI2236029MXABJFDCK" disabled />
-
-      <label for="pdKategoriRumahIbadahSelect">Kategori Aktivitas:</label>
-      <select id="pdKategoriRumahIbadahSelect">
-        <option value="1">Pembebasan Lahan</option>
-        <option value="2">Pembangunan</option>
-        <option value="3">Renovasi</option>
-        <option value="4">Sarana dan Prasarana</option>
-        <option value="5">Biaya Pengolahan</option>
-      </select>
-    </div>
-
-    <label for="pdberkasInput">Berkas Penggalangan Dana</label>
-    <input id="pdBerkasInput" placeholder="Berkas Penggalangan Dana" />
+    <button id="cekRumahIbadahNextButton" type="button">Next</button>
   </div>
+
+  <form method="POST">
+    <div id="formPd" class="form">
+      <h1>Form Penggalangan Dana</h1>
+
+      <b>Informasi Umum Penggalangan Dana</b><br />
+
+      <label for="pdIdInput">ID Penggalangan Dana</label>
+      <input id="pdIdInput" value="Loading..." disabled />
+
+      <label for="pdEmailInput">Email Penggalang Dana</label>
+      <input id="pdEmailInput" value="{{ email }}" disabled />
+
+      <label for="pdJudulInput">Judul</label>
+      <input id="pdJudulInput" placeholder="Judul" />
+
+      <label for="pdDeskripsiInput">Deskripsi</label>
+      <input id="pdDeskripsiInput" placeholder="Deskripsi" />
+
+      <label for="pdKotaInput">Kota</label>
+      <input id="pdKotaInput" placeholder="Kota" />
+
+      <label for="pdProvinsiInput">Provinsi</label>
+      <input id="pdProvinsiInput" placeholder="Provinsi" />
+
+      <label for="pdDeadlinePenggalanganDanaInput">
+        Deadline Penggalangan Dana
+      </label>
+      <input
+        id="pdDeadlinePenggalanganDanaInput"
+        placeholder="Deadline Penggalangan Dana"
+      />
+
+      <label for="pdJumlahTargetDanaInput">Jumlah Target Dana</label>
+      <input 
+        id="pdJumlahTargetDanaInput" 
+        placeholder="Jumlah Target Dana" 
+      />
+
+      <br />
+      <b>Informasi Tambahan Penggalangan Dana</b>
+
+      <label for="pdKategoriInput">Kategori</label>
+      <input id="pdKategoriInput" value="Loading..." disabled hidden />
+      <input id="pdNamaKategori" value="Loading..." disabled />
+
+      <div id="formPdKesehatan" class="form">
+        <label for="pdNikPasienInput">NIK Pasien</label>
+        <input id="pdNikPasienInput" value="1497199854621440" disabled />
+
+        <label for="pdNamaPasienInput">Nama Pasien</label>
+        <input id="pdNamaPasienInput" value="Modesty Rickertsen" disabled />
+
+        <label for="pdPenyakitPasienInput">Penyakit Utama</label>
+        <input id="pdPenyakitPasienInput" placeholder="Penyakit Utama" />
+      </div>
+
+      <div id="formPdRumahIbadah" class="form">
+        <label for="pdSertifikatRumahIbadahInput">
+          Nomor Sertifikat Rumah ibadah
+        </label>
+        <input
+          id="pdSertifikatRumahIbadahInput"
+          value="RI2236029MXABJFDCK"
+          disabled
+        />
+
+        <label for="pdKategoriRumahIbadahSelect">Kategori Aktivitas:</label>
+        <select id="pdKategoriRumahIbadahSelect">
+          <option value="1">Pembebasan Lahan</option>
+          <option value="2">Pembangunan</option>
+          <option value="3">Renovasi</option>
+          <option value="4">Sarana dan Prasarana</option>
+          <option value="5">Biaya Pengolahan</option>
+        </select>
+      </div>
+
+      <label for="pdberkasInput">Berkas Penggalangan Dana</label>
+      <input id="pdBerkasInput" placeholder="Berkas Penggalangan Dana" />
+
+      <input type="button" value="Submit" />
+    </div>
+  </form>
 </body>

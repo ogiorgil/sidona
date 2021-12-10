@@ -1,3 +1,10 @@
+let listKategori = [];
+$.get("/pd/kategori/", (data, status) => {
+  if (status !== "success") return;
+  listKategori = data.kategori;
+  console.log(listKategori);
+});
+
 let kategoriPd;
 let nikPasien, namaPasien, tanggalLahirPasien, alamatPasien, pekerjaanPasien;
 let sertifikatRumahIbadah, namaRumahIbadah, alamatRumahIbadah, jenisRumahIbadah;
@@ -17,11 +24,29 @@ $(document).ready(() => {
 
   $("#formKategoriPd").show();
 
-  // Section pilih kategori.
+  // Section pilih kategori
   $("#kategoriPdNextButton").click(() => {
     kategoriPd = $("#kategoriPdSelect").val();
+    kategoriPd = listKategori.find((k) => k.id == kategoriPd);
 
-    // Jika kategori "Kesehatan", tampilkan pemilihan Pasien.
+    // Generate id baru untuk penggalangan dana
+    $.post(
+      "/pd/generate-id/",
+      {
+        id_kategori_pd: kategoriPd.id,
+        alias_kategori_pd: kategoriPd.alias,
+      },
+      (data, status) => {
+        if (status !== "success") return;
+        $("#pdIdInput").val(data.id);
+      }
+    );
+
+    // Masukkan nama kategori pada form
+    $("#pdKategoriInput").val(kategoriPd.id);
+    $("#pdNamaKategori").val(kategoriPd.nama);
+
+    // Jika kategori "Kesehatan", tampilkan pemilihan Pasien
     if (kategoriPd === "2") {
       $("#formKategoriPd").hide();
       $("#dialogTambahPasien").show();
@@ -34,7 +59,7 @@ $(document).ready(() => {
     }
   });
 
-  // Section dialog tambah Pasien.
+  // Section dialog tambah Pasien
   $("#dialogTambahPasien")
     .find("#yaButton")
     .click(() => {
@@ -49,7 +74,7 @@ $(document).ready(() => {
       $("#cekPasien").show();
     });
 
-  // Section form Pasien.
+  // Section form Pasien
   $("#pasienNextButton").click(() => {
     nikPasien = $("pasienNikInput").text();
     namaPasien = $("pasienNamaInput").text();
@@ -62,14 +87,14 @@ $(document).ready(() => {
     $("#formPd").find("#formPdKesehatan").show();
   });
 
-  // Section cek Pasien.
+  // Section cek Pasien
   $("#cekPasienNextButton").click(() => {
     $("#cekPasien").hide();
     $("#formPd").show();
     $("#formPd").find("#formPdKesehatan").show();
   });
 
-  // Section dialog tambah Rumah Ibadah.
+  // Section dialog tambah Rumah Ibadah
   $("#dialogTambahRumahIbadah")
     .find("#yaButton")
     .click(() => {
@@ -84,7 +109,7 @@ $(document).ready(() => {
       $("#cekRumahIbadah").show();
     });
 
-  // Section form Rumah Ibadah.
+  // Section form Rumah Ibadah
   $("#rumahIbadahNextButton").click(() => {
     sertifikatRumahIbadah = $("rumahIbadahSertifikatInput").text();
     namaRumahIbadah = $("rumahIbadahNamaInput").text();
@@ -96,7 +121,7 @@ $(document).ready(() => {
     $("#formPd").find("#formPdRumahIbadah").show();
   });
 
-  //Section cek Rumah Ibadah.
+  //Section cek Rumah Ibadah
   $("#cekRumahIbadahNextButton").click(() => {
     $("#cekRumahIbadah").hide();
     $("#formPd").show();
