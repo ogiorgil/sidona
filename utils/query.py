@@ -17,16 +17,12 @@ def query(query_str: str):
         try:
             cursor.execute(query_str)
 
-            if query_str.lower().startswith("select"):
+            if query_str.strip().lower().startswith("select"):
                 # Kalau ga error, return hasil SELECT
                 hasil = map_cursor(cursor)
             else:
                 # Kalau ga error, return jumlah row yang termodifikasi oleh INSERT, UPDATE, DELETE
                 hasil = cursor.rowcount
-        except DatabaseError:
-            hasil = "DatabaseError"
-        except IntegrityError:
-            hasil = "IntegrityError"
         except Exception as e:
             # Ga tau error apa
             hasil = e

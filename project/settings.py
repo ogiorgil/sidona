@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     "komorbid",
     "trigger_4",
     "pengguna",
+    "trigger5"
 ]
 
 MIDDLEWARE = [
