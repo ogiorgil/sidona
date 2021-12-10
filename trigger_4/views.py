@@ -21,7 +21,7 @@ def form_create_donasi(request):
     if not is_authenticated(request):
         return redirect(f"/auth/login?next=/t4/create-donasi/?id={id_penggalangan}")
     
-    if request.session["role"] == "organisasi":
+    if request.session["role"] != "individu":
         return HttpResponse("Hanya individu yang bisa berdonasi")
 
     context = dict()
@@ -82,19 +82,24 @@ def profil_pengguna(request):
     if not is_authenticated(request):
         return redirect("/auth/login?next=/t4/profil-pengguna")
 
-    if request.session["role"] != "individu":
+    if request.session["role"] == "admin":
         return HttpResponse("Admin tidak mempunyai profil")
 
     email = request.session['email']
     # ntar pas di query select berdasarkan email sessionnya
-    data = query(
-        f"""select p.email, p.nama, p.nomorhp,p.alamat,p.namabank,p.norek,i.NIK,i.tanggallahir,i.jeniskelamin,i.jumlahwishlist
-        from penggalang_dana p, individu i
-        where p.email ='{email}' and i.email = p.email """
-    )
-    
-    context["p"] = data[0]
-    print(data)
+    if request.session["role"] == "individu":
+        data = query(
+            f"""select p.email, p.nama, p.nomorhp,p.alamat,p.namabank,p.norek,i.NIK,i.tanggallahir,i.jeniskelamin,i.jumlahwishlist
+            from penggalang_dana p, individu i
+            where p.email ='{email}' and i.email = p.email """
+        )
+        
+        context["p"] = data[0]
+        print(data)
+    elif request.session["role"] == "organisasi":
+        org = query(f"""select p.nama, p.nomorhp,p.alamat,p.namabank,p.norek, o.email, o.namaorganisasi,o.nap,o.notelporganisasi,o.tahunberdiri from penggalang_dana p, organisasi o where o.email ='{email}' and o.email = p.email """)
+        context["org"] = org[0]
+        print(context)
 
     wishlist = query(
         f"""select w.idpd, pdd.judul, k.namakategori
@@ -104,7 +109,8 @@ def profil_pengguna(request):
         where w.email ='{email}'"""
     )
     context["wishlist"] = wishlist
-    print(context)
+    context["role"]= request.session["role"]
+
     return render(request, "profilpengguna.html", context)
 
 
