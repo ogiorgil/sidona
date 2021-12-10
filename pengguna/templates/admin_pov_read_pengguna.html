@@ -1,82 +1,115 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<style>
-table {
-  border-collapse: collapse;
-  width: 100%;
-}
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
 
-th, td {
-  padding: 8px;
-  text-align: left;
-  border-bottom: 1px solid #DDD;
-}
-html {
-    display: table;
-    margin: auto;
-}
+    th,
+    td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #DDD;
+    }
 
-body {
-    display: table-cell;
-    vertical-align: middle;
-}
-tr:hover {background-color: #D6EEEE;}
+    html {
+      display: table;
+      margin: auto;
+    }
 
-.content{
-  align-items: center;
-}
-</style>
+    body {
+      display: table-cell;
+      vertical-align: middle;
+    }
+
+    tr:hover {
+      background-color: #D6EEEE;
+    }
+
+    .content {
+      align-items: center;
+    }
+  </style>
 </head>
+
 <body>
-<div class = 'content'>
-<h2>Profil Pengguna</h2>
+  <div class='content'>
+    <h2>Profil Pengguna</h2>
 
-<label for="email_pengguna">Email : </label>
-<input id="profil_email" value="jsimony2@skyrock.com" type="text" disabled>
-<br>
-<br>
-<label for="nama_pengguna">Nama : </label>
-<input id="profil_nama" value="J Simon" type="text" disabled>
-<br>
-<br>
-<label for="no_hp">Nomor HP : </label>
-<input id="profil_hp" value="081218439" type="text" disabled>
-<br>
-<br>
-<label for="alamat">Alamat : </label>
-<input id="profil_alamat" value="Jalan Mekarsari" type="text" disabled>
-<br>
-<br>
-<label for="bank">Nama Bank : </label>
-<input id="profil_bank" value="BCA" type="text" disabled>
-<br>
-<br>
-<label for="rekening">No Rekening : </label>
-<input id="profil_rekening" value="12910218092" type="text" disabled>
-<br>
-<br>
-<labelp>Jenis        :</label>
-  <br>
-  <input type="radio" id="individu" name="opsi" value="individu" checked>
-  <label for="ya">Individu</label><br>
-  <input type="radio" id="organisasi" name="opsi" value="organisasi" disabled>
-  <label for="tidak">Organisasi</label>
-<br>
-<br>
-<label for="nik">NIK : </label>
-<input id="profil_nik" value="12910218092" type="text" disabled>
-<br>
-<br>
-<label for="tanggal">Tanggal Lahir : </label>
-<input id="profil_tanggal" value="2000-11-04" type="date" disabled>
-<br>
-<br>
-<label for="jenis_kelamin">Jenis Kelamin : </label>
-<input id="profil_jenis_kelamin" value="Male" type="text" disabled>
+    <label for="email_pengguna">Email : </label>
+    <input id="profil_email" value="{{ p.email }}" type="text" disabled>
+    <br>
+    <br>
+    <label for="nama_pengguna">Nama : </label>
+    <input id="profil_nama" value="{{ p.nama }}" type="text" disabled>
+    <br>
+    <br>
+    <label for="no_hp">Nomor HP : </label>
+    <input id="profil_hp" value="{{ p.nomorhp }}" type="text" disabled>
+    <br>
+    <br>
+    <label for="alamat">Alamat : </label>
+    <input id="profil_alamat" value="{{ p.alamat }}" type="text" disabled>
+    <br>
+    <br>
+    <label for="bank">Nama Bank : </label>
+    <input id="profil_bank" value="{{ p.namabank }}" type="text" disabled>
+    <br>
+    <br>
+    <label for="rekening">No Rekening : </label>
+    <input id="profil_rekening" value="{{ p.norek }}" type="text" disabled>
+    <br>
+    <br>
+    <label for="jenis">Jenis:</label>
+    {% if p.nik %}
+    <input id="jenis" value="Individu" type="text" disabled>
+    <br>
+    <br>
+    <label for="nik">NIK : </label>
+    <input id="profil_nik" value="{{ p.nik }}" type="text" disabled>
+    <br>
+    <br>
+    <label for="tanggal">Tanggal Lahir : </label>
+    <input id="profil_tanggal" value="{{ p.tanggallahir }}" type="text" disabled>
+    <br>
+    <br>
+    <label for="jenis_kelamin">Jenis Kelamin : </label>
+    <input id="profil_jenis_kelamin" value="{{ p.jeniskelamin }}" type="text" disabled>
+    <br>
+    <br>
+    <label for="fotoktp">Foto KTP:</label>
+    <input id="fotoktp" value="{{ p.linkrepo }}" type="text" disabled>
+    {% else %}
+    <input id="jenis" value="Organisasi" type="text" disabled>
+    <br>
+    <br>
+    <label for="namaorganisasi">Nama Organisasi:</label>
+    <input id="namaorganisasi" value="{{ p.namaorganisasi }}" type="text" disabled>
+    <br>
+    <br>
+    <label for="nap">Nomor Akta Pendirian:</label>
+    <input id="nap" value="{{ p.nap }}" type="text" disabled>
+    <br>
+    <br>
+    <label for="notelporg">No. Telepon Organisasi:</label>
+    <input id="notelporg" value="{{ p.notelporganisasi }}" type="text" disabled>
+    <br>
+    <br>
+    <label for="tahunberdiri">Tahun Berdiri:</label>
+    <input id="notelporg" value="{{ p.tahunberdiri }}" type="text" disabled>
+    <br>
+    <br>
+    <label for="notelporg">No. Telepon Organisasi:</label>
+    <input id="notelporg" value="{{ p.notelporganisasi }}" type="text" disabled>
+    {% endif %}
 
-<p>Foto KTP        :<br><img src =https://image.shutterstock.com/z/stock-vector-ktp-indonesia-id-card-1628461459.jpg width="120 px"></p>
-<button>Cancel</button>
-</div>
+    <br>
+    <br>
+    <button onclick=history.back()>Cancel</button>
+  </div>
 </body>
+
 </html>
