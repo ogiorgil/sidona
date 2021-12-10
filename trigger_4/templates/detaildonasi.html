@@ -5,12 +5,15 @@
 table, th, td {
   border: 1px solid black;
 }
+ul{
+  margin-left:auto;margin-right:auto;
+}
 </style>
 </head>
 <body>
 
 <h2 text align =Center>Detail Donasi</h2>
-
+<div>
 <ul>
 <li> <label for="email_donatur">Email Donatur: </label>
     <input id="detail_email_donatur" value="{{d.email}}" type="text" disabled> </li>
@@ -46,6 +49,6 @@ table, th, td {
 <form action="/t4/data-donasi/">
   <input type="submit" value="Cancel" />
 </form>
-
+</div>
 </body>
 </html>

@@ -6,20 +6,20 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
-    <style>
-        table,
-        td,
-        th {
-            border: 1px solid black;
-            text-align: center;
-        }
+	<style>
+		table,
+		td,
+		th {
+			border: 1px solid black;
+			text-align: center;
+		}
 
-        table {
-            border-collapse: collapse;
-            margin-top: 10px;
-            width: 100%;
-        }
-    </style>
+		table {
+			border-collapse: collapse;
+			margin-top: 10px;
+			width: 100%;
+		}
+	</style>
 </head>
 
 <body>
@@ -32,28 +32,47 @@
 			<th>Status</th>
 			<th>Action</th>
 		</tr>
+		{% for p in pengguna %}
 		<tr>
-			<td>pbarstow0@parallels.com</td>
-			<td>Pauline Barstow</td>
+			<td>{{ p.email }}</td>
+			<td>{{ p.nama }}</td>
+			{% if p.nik %}
 			<td>Individu</td>
-			<td>Sudah Terverifikasi</td>
-            <td>
-				<button>
+			{% else %}
+			<td>Organisasi</td>
+			{% endif %}
+			<td>{{ p.statusverifikasi }}</td>
+			<td>
+				<button class="detail_button" id="detail_button_{{ p.email }}">
 					Detail
 				</button>
+				{% if p.statusverifikasi != "Sudah Terverifikasi" %}
+				<button class="verifikasi_button" id="verifikasi_button_{{ p.email }}">
+					Verifikasi
+				</button>
+				{% endif %}
 			</td>
 		</tr>
-        <tr>
-            <td>ofew1@dion.ne.jp</td>
-            <td>Odele Few</td>
-            <td>Organisasi</td>
-            <td>Sudah Terverifikasi</td>
-            <td>
-                <button>
-                    Detail
-                </button>
-            </td>
+		{% endfor %}
 	</table>
+
+	<script>
+		var detailButtons = document.getElementsByClassName("detail_button");
+		[].slice.call(detailButtons).forEach(function (button) {
+			button.onclick = function () {
+				let email = button.id.slice(14,);
+				location.href = "/auth/admin-detail-pengguna/?email=" + email;
+			};
+		});
+
+		var verifikasiButtons = document.getElementsByClassName("verifikasi_button");
+		[].slice.call(verifikasiButtons).forEach(function (button) {
+			button.onclick = function () {
+				let email = button.id.slice(18,);
+				location.href = "/auth/verifikasi-pengguna/?email=" + email;
+			};
+		});
+	</script>
 </body>
 
 </html>

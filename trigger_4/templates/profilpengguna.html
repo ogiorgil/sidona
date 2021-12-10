@@ -26,58 +26,132 @@ tr:hover {background-color: #D6EEEE;}
 .content{
   align-items: center;
 }
+
+.row {
+  display: flex;
+}
+
+.column {
+  flex: 50%;
+}
 </style>
 </head>
 <body>
-<div class = 'content'>
+{% include "navbar.html" %}
+
 <h2>Profil Pengguna</h2>
+<div class = 'row'>
+  <div class = 'column'>
+    {% if role == 'individu' %}
+    <label for="email_pengguna">Email : </label>
+    <input id="profil_email" value="{{p.email}}" type="text" disabled>
+    <br>
+    <br>
+    <label for="nama_pengguna">Nama : </label>
+    <input id="profil_nama" value="{{p.nama}}" type="text" disabled>
+    <br>
+    <br>
+    <label for="no_hp">Nomor HP : </label>
+    <input id="profil_hp" value="{{p.nomorhp}}" type="text" disabled>
+    <br>
+    <br>
+    <label for="alamat">Alamat : </label>
+    <input id="profil_alamat" value='{{p.alamat}}' type="text" disabled>
+    <br>
+    <br>
+    <label for="bank">Nama Bank : </label>
+    <input id="profil_bank" value="{{p.namabank}}" type="text" disabled>
+    <br>
+    <br>
+    <label for="rekening">No Rekening : </label>
+    <input id="profil_rekening" value="{{p.norek}}" type="text" disabled>
+    <br>
+    <br>
+    {% endif %}
 
-<label for="email_pengguna">Email : </label>
-<input id="profil_email" value="{{p.email}}" type="text" disabled>
-<br>
-<br>
-<label for="nama_pengguna">Nama : </label>
-<input id="profil_nama" value="{{p.nama}}" type="text" disabled>
-<br>
-<br>
-<label for="no_hp">Nomor HP : </label>
-<input id="profil_hp" value="{{p.nomorhp}}" type="text" disabled>
-<br>
-<br>
-<label for="alamat">Alamat : </label>
-<input id="profil_alamat" value='{{p.alamat}}' type="text" disabled>
-<br>
-<br>
-<label for="bank">Nama Bank : </label>
-<input id="profil_bank" value="{{p.namabank}}" type="text" disabled>
-<br>
-<br>
-<label for="rekening">No Rekening : </label>
-<input id="profil_rekening" value="{{p.norek}}" type="text" disabled>
-<br>
-<br>
-<labelp>Jenis		:</label>
-  <br>
-  <input type="radio" id="individu" name="opsi" value="individu" checked>
-  <label for="ya">Individu</label><br>
-  <input type="radio" id="organisasi" name="opsi" value="organisasi" disabled>
-  <label for="tidak">Organisasi</label>
-<br>
-<br>
-<label for="nik">NIK : </label>
-<input id="profil_nik" value="{{p.nik}}" type="text" disabled>
-<br>
-<br>
-<label for="tanggal">Tanggal Lahir : </label>
-<input id="profil_tanggal" value="{{p.tanggallahir}}" type="date" disabled>
-<br>
-<br>
-<label for="jenis_kelamin">Jenis Kelamin : </label>
-<input id="profil_jenis_kelamin" value="{{p.jeniskelamin}}" type="text" disabled>
+    {% if role == 'organisasi' %}
+    <label for="email_pengguna">Email : </label>
+    <input id="profil_email" value="{{org.email}}" type="text" disabled>
+    <br>
+    <br>
+    <label for="nama_pengguna">Nama : </label>
+    <input id="profil_nama" value="{{org.nama}}" type="text" disabled>
+    <br>
+    <br>
+    <label for="no_hp">Nomor HP : </label>
+    <input id="profil_hp" value="{{org.nomorhp}}" type="text" disabled>
+    <br>
+    <br>
+    <label for="alamat">Alamat : </label>
+    <input id="profil_alamat" value='{{org.alamat}}' type="text" disabled>
+    <br>
+    <br>
+    <label for="bank">Nama Bank : </label>
+    <input id="profil_bank" value="{{org.namabank}}" type="text" disabled>
+    <br>
+    <br>
+    <label for="rekening">No Rekening : </label>
+    <input id="profil_rekening" value="{{org.norek}}" type="text" disabled>
+    <br>
+    <br>
+    {% endif %}
+    <labelp>Jenis		:</label>
+      {% if role == 'organisasi' %}
+      <br>
+      <input type="radio" id="individu" name="opsi" value="individu" disabled>
+      <label for="ya">Individu</label><br>
+      <input type="radio" id="organisasi" name="opsi" value="organisasi" checked>
+      <label for="tidak">Organisasi</label>
+      {% elif role == 'individu' %}
+      <br>
+      <input type="radio" id="individu" name="opsi" value="individu" checked>
+      <label for="ya">Individu</label><br>
+      <input type="radio" id="organisasi" name="opsi" value="organisasi" disabled>
+      <label for="tidak">Organisasi</label>
+    {% endif %}
+  </div>
+  
+   {% if role == 'individu' %}
+  <div class= 'column'>
+    <label for="nik">NIK : </label>
+    <input id="profil_nik" value="{{p.nik}}" type="text" disabled>
+    <br>
+    <br>
+    <label for="tanggal">Tanggal Lahir : </label>
+    <input id="profil_tanggal" value="{{p.tanggallahir}}" disabled>
+    <br>
+    <br>
+    <label for="jenis_kelamin">Jenis Kelamin : </label>
+    <input id="profil_jenis_kelamin" value="{{p.jeniskelamin}}" type="text" disabled>
 
-<p>Foto KTP		:<br><img src =https://image.shutterstock.com/z/stock-vector-ktp-indonesia-id-card-1628461459.jpg width="120 px"></p>
-<p><b>Saldo Donapay: 0</b></p>
+    <p>Foto KTP		:<br><img src =https://image.shutterstock.com/z/stock-vector-ktp-indonesia-id-card-1628461459.jpg width="120 px"></p>
+    
+  </div>
+  {% elif role == 'organisasi' %}
+  <div class= 'column'>
+    <label for="nama">Nama Organisasi : </label>
+    <input id="nama" value="{{org.namaorganisasi}}" type="text" disabled>
+    <br>
+    <br>
+    <label for="akta">Nomor Akta Pendirian : </label>
+    <input id="akta" value="{{org.nap}}" disabled>
+    <br>
+    <br>
+    <label for="no_telp_org">No. Telepon Organisasi:  </label>
+    <input id="no_telp_org" value="{{org.notelporganisasi}}" type="text" disabled>
+    <br>
+    <br>
+    <label for="tahun_berdiri">Tahun Berdiri:  </label>
+    <input id="tahun_berdiri" value="{{org.tahunberdiri}}" type="text" disabled>
 
+    <p>Foto Akta		:<br><img src =https://lbhkdki.com/wp-content/uploads/elementor/thumbs/005-owwofy1yjf0ru597et59v7sl0uybr70214q43bpjig.jpg width="120 px"></p>
+   
+  </div>
+  {% endif %}
+ 
+</div>
+
+{% if role == 'individu' %}
 <table>
   <tr>
     <th>ID</th>
@@ -94,7 +168,7 @@ tr:hover {background-color: #D6EEEE;}
       <button class="detail_button" id="{{w.idpd}}">
         Detail
       </button>
-      <button class="donasi_button" id="donasi_button_{{ w.id }}">
+      <button class="donasi_button" id="{{ w.idpd }}">
         Donasi
       </button>
  
@@ -102,15 +176,13 @@ tr:hover {background-color: #D6EEEE;}
         <input name="id" value="{{ w.idpd }}" hidden />
         <input type="submit" value="Delete" />
     </form>
-    
     </td>
   </tr>
   {% endfor %}
-<p><b>Wishlist Donasi: {{p.jumlahwishlist}}</b></p>
-
-
-<button>Cancel</button>
-</div>
+  <p><b>Wishlist Donasi: {{p.jumlahwishlist}}</b></p>
+  {% endif %}
+  <p><b>Saldo Donapay: 0</b></p>
+  
 <script>
   var detailButtons = document.getElementsByClassName("detail_button");
 [].slice.call(detailButtons).forEach(function (button) {
@@ -121,6 +193,17 @@ tr:hover {background-color: #D6EEEE;}
         location.href = "/detail-penggalangan?id=" + id_penggalangan;
     };
 });
+
+var donasiButton = document.getElementsByClassName("donasi_button");
+[].slice.call(donasiButton).forEach(function (button) {
+    button.onclick = function () {
+        let id_penggalangan = button.id
+        location.href = "/t4/create-donasi?id=" + id_penggalangan;
+    }
+})
+
+
+
 
 </script>
 </body>
