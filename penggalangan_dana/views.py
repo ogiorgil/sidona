@@ -96,7 +96,7 @@ def read_pd_details(request):
     donasi = query(f"""
         SELECT d.email, d.timestamp, d.nominal, d.doa
         FROM penggalangan_dana_pd AS pdpd, donasi AS d
-        WHERE pdpd.id = d.idpd
+        WHERE pdpd.id = d.idpd AND pdpd.id = '{id}'
     """)
 
     data["donasi"] = donasi
@@ -138,7 +138,7 @@ def create_pd(request):
         ('{pd_id}', '{judul}', '{deskripsi}', '{kota}', '{provinsi}', '{berkas}', 'Belum Terverifikasi', 
         '{current_time}', null, '{deadline}', '{target_dana}', 0, 0, 0, '{email}', null, '{kategori_id}')
     """)
-    
+
     if type(insert) != int:
         return HttpResponse("Failed to create new Penggalangan Dana!", status=500)
 
@@ -213,6 +213,7 @@ def create_pasien(request):
     return HttpResponse("success", status=200)
 
 
+@csrf_exempt
 def get_kategori(_):
     kategori = query("SELECT * FROM kategori_pd")
     kategori = [{
