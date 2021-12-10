@@ -96,16 +96,18 @@
 
     {% for d in donasi %}
       <tr>
-        <th>{{ d.email }}</th>
-        <th>{{ d.timestamp }}</th>
-        <th>{{ d.nominal }}</th>
-        <th>{{ d.doa }}</th>
+        <td>{{ d.email }}</td>
+        <td>{{ d.timestamp }}</td>
+        <td>{{ d.nominal }}</td>
+        <td>{{ d.doa }}</td>
       </tr>
     {% empty %}
-      <th>-</th>
-      <th>-</th>
-      <th>-</th>
-      <th>-</th>
+      <tr>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
+      </tr>
     {% endfor %}
   </table>
 
@@ -120,9 +122,9 @@
       <th>Deskripsi</th>
     </tr>
     <tr>
-      <th>-</th>
-      <th>-</th>
-      <th>-</th>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
     </tr>
   </table>
 
