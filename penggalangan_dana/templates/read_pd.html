@@ -10,6 +10,7 @@
 
 <body>
   <h1>Daftar Penggalangan Dana Pribadi</h1>
+  <h3>{{ email }}</h3>
 
   {% if penggalangan_dana %}
     <table>
@@ -40,9 +41,11 @@
           <td>{{ pd.namakategori }}</td>
           <td>{{ pd.statusverifikasi }}</td>
           <td>
-            <button type="button">Detail</button>
-            <button type="button">Cairkan</button>
-            <button type="button">Delete</button>
+            <a href="/pd/details/?id={{ pd.id }}" type="button">Detail</a>
+            {% if pd.statusverifikasi == "Terverifikasi" %}
+              <button type="button">Cairkan</button>
+              <button type="button">Delete</button>
+            {% endif %}
           </td>
         </tr>
       {% endfor %}
@@ -51,4 +54,6 @@
     <h3>Anda tidak memiliki Penggalangan Dana</h3>
   {% endif %}
 
+  <br />
+  <a href="/pd/create">Buat Penggalangan Dana</a>
 </body>
