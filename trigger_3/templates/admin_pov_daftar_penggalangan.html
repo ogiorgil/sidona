@@ -11,6 +11,7 @@
 </head>
 
 <body>
+  {% include "navbar.html" %}
   <h1>Halaman Daftar Penggalangan Dana (POV Admin)</h1>
   <table>
     <tr>
@@ -43,7 +44,7 @@
           Detail
         </button>
         {% if p.statusverifikasi != "Terverifikasi" %}
-        <button>
+        <button class="verifikasi_button" id="verifikasi_button_{{ p.id }}">
           Verifikasi
         </button>
         {% endif %}

@@ -32,6 +32,16 @@ def get_role(email, password):
     return ""
 
 
+def get_session_data(request):
+    if not is_authenticated(request):
+        return {}
+
+    try:
+        return {"email": request.session["email"], "role": request.session["role"]}
+    except:
+        return {}
+
+
 @csrf_exempt
 def login(request):
     next = request.GET.get('next')
@@ -54,6 +64,8 @@ def login(request):
         request.session['email'] = email
         request.session['password'] = password
         request.session['role'] = role
+        request.session.set_expiry(0)
+        request.session.modified = True
 
         if (next != None and next != "None"):
             return redirect(next)
@@ -119,6 +131,8 @@ def register_admin(request):
     request.session['email'] = email
     request.session['password'] = password
     request.session['role'] = 'admin'
+    request.session.set_expiry(0)
+    request.session.modified = True
 
     if (next != None and next != "None"):
         return redirect(next)
@@ -172,6 +186,8 @@ def register_individu(request):
     request.session['email'] = email
     request.session['password'] = password
     request.session['role'] = 'individu'
+    request.session.set_expiry(0)
+    request.session.modified = True
 
     if (next != None and next != "None"):
         return redirect(next)
@@ -217,6 +233,8 @@ def register_organisasi(request):
     request.session['email'] = email
     request.session['password'] = password
     request.session['role'] = 'organisasi'
+    request.session.set_expiry(0)
+    request.session.modified = True
 
     if (next != None and next != "None"):
         return redirect(next)
