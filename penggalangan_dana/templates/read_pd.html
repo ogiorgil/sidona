@@ -50,7 +50,10 @@
                 <li><button type="button">Cairkan</button></li>
               {% endif %}
 
-              <li><button type="button">Delete</button></li>
+              <form method="POST" action="/pd/delete/">
+                <input name="id" value="{{ pd.id }}" hidden />
+                <li><button type="submit">Delete</button></li>
+              </form>
             </ul>
           </td>
         </tr>
