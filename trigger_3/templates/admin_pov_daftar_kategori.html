@@ -39,11 +39,11 @@
             button.onclick = function () {
                 var name = document.getElementById("nama_" + button.id).innerText;
                 console.log(name);
-                location.href = "/update-kategori?id=" + button.id + "&nama=" + name;
+                location.href = "/t3/update-kategori?id=" + button.id + "&nama=" + name;
             };
         });
         document.getElementById("create_button").onclick = function () {
-            location.href = "/create-kategori";
+            location.href = "/t3/create-kategori";
         };
     </script>
 </body>
