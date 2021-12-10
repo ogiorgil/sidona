@@ -33,27 +33,27 @@ tr:hover {background-color: #D6EEEE;}
 <h2>Profil Pengguna</h2>
 
 <label for="email_pengguna">Email : </label>
-<input id="profil_email" value="jsimony2@skyrock.com" type="text" disabled>
+<input id="profil_email" value="{{p.email}}" type="text" disabled>
 <br>
 <br>
 <label for="nama_pengguna">Nama : </label>
-<input id="profil_nama" value="J Simon" type="text" disabled>
+<input id="profil_nama" value="{{p.nama}}" type="text" disabled>
 <br>
 <br>
 <label for="no_hp">Nomor HP : </label>
-<input id="profil_hp" value="081218439" type="text" disabled>
+<input id="profil_hp" value="{{p.nomorhp}}" type="text" disabled>
 <br>
 <br>
 <label for="alamat">Alamat : </label>
-<input id="profil_alamat" value="Jalan Mekarsari" type="text" disabled>
+<input id="profil_alamat" value='{{p.alamat}}' type="text" disabled>
 <br>
 <br>
 <label for="bank">Nama Bank : </label>
-<input id="profil_bank" value="BCA" type="text" disabled>
+<input id="profil_bank" value="{{p.namabank}}" type="text" disabled>
 <br>
 <br>
 <label for="rekening">No Rekening : </label>
-<input id="profil_rekening" value="12910218092" type="text" disabled>
+<input id="profil_rekening" value="{{p.norek}}" type="text" disabled>
 <br>
 <br>
 <labelp>Jenis		:</label>
@@ -65,23 +65,64 @@ tr:hover {background-color: #D6EEEE;}
 <br>
 <br>
 <label for="nik">NIK : </label>
-<input id="profil_nik" value="12910218092" type="text" disabled>
+<input id="profil_nik" value="{{p.nik}}" type="text" disabled>
 <br>
 <br>
 <label for="tanggal">Tanggal Lahir : </label>
-<input id="profil_tanggal" value="2000-11-04" type="date" disabled>
+<input id="profil_tanggal" value="{{p.tanggallahir}}" type="date" disabled>
 <br>
 <br>
 <label for="jenis_kelamin">Jenis Kelamin : </label>
-<input id="profil_jenis_kelamin" value="Male" type="text" disabled>
+<input id="profil_jenis_kelamin" value="{{p.jeniskelamin}}" type="text" disabled>
 
 <p>Foto KTP		:<br><img src =https://image.shutterstock.com/z/stock-vector-ktp-indonesia-id-card-1628461459.jpg width="120 px"></p>
 <p><b>Saldo Donapay: 0</b></p>
 
-<p><b>Wishlist Donasi: 0</b></p>
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Judul</th>
+    <th>Kategori</th>
+    <th>Action</th>
+  </tr>
+  {% for w in wishlist %}
+  <tr id="row_{{ p.id }}">
+    <td id="id_{{ p.id }}">{{ w.idpd }}</td>
+    <td id="judul_{{ p.id }}">{{ w.judul }}</td>
+    <td id="namakategori_{{ p.id }}">{{ w.namakategori}}</td>
+    <td>
+      <button class="detail_button" id="{{w.idpd}}">
+        Detail
+      </button>
+      <button class="donasi_button" id="donasi_button_{{ w.id }}">
+        Donasi
+      </button>
+ 
+      <form method="POST" action="/t4/delete-wishlist/">
+        <input name="id" value="{{ w.idpd }}" hidden />
+        <input type="submit" value="Delete" />
+    </form>
+    
+    </td>
+  </tr>
+  {% endfor %}
+<p><b>Wishlist Donasi: {{p.jumlahwishlist}}</b></p>
+
 
 <button>Cancel</button>
 </div>
+<script>
+  var detailButtons = document.getElementsByClassName("detail_button");
+[].slice.call(detailButtons).forEach(function (button) {
+    button.onclick = function () {
+        let id_penggalangan = button.id;
+        console.log(id_penggalangan) ;
+        // location.href = "t3/detail-penggalangan?id=" + id_penggalangan;
+        location.href = "/detail-penggalangan?id=" + id_penggalangan;
+    };
+});
+
+</script>
 </body>
 </html>
 

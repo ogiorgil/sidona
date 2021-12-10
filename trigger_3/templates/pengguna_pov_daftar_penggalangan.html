@@ -42,9 +42,12 @@
         <button class="donasi_button" id="donasi_button_{{ p.id }}">
           Donasi
         </button>
-        <button class="wishlist_button" id="wishlist_button_{{ p.id }}">
-          Tambah ke Wishlist
-        </button>
+
+        <form method="POST" action="/t4/add-wishlist/">
+          <input name="id" value="{{ p.id }}" hidden />
+          <input type="submit" value="Tambah Wishlist" />
+      </form>
+      
       </td>
     </tr>
     {% endfor %}

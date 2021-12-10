@@ -32,5 +32,16 @@ urlpatterns = [
         "daftar-penggalangan/",
         views.daftar_penggalangan_pengguna_pov,
         name="daftar-penggalangan-pengguna",
+    ),
+    path(
+        "add-wishlist/",
+        views.tambah_wishlist,
+        name="add-wishlist"
+    ),
+    path(
+        "delete-wishlist/",
+        views.delete_wishlist,
+        name="delete-wishlist"
     )
+
 ]

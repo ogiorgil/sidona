@@ -266,6 +266,7 @@ def form_create_kategori(request):
     if request.method == "POST":
         body = request.POST
         namakategori = body["namakategori"]
+        
         query_str = f"INSERT INTO kategori_pd (namakategori, alias_kategori) VALUES ('{namakategori}', '{namakategori[0]}')"
         result = query(query_str)
         return redirect("/t3/kategori-penggalangan-admin/")

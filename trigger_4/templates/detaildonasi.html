@@ -13,33 +13,33 @@ table, th, td {
 
 <ul>
 <li> <label for="email_donatur">Email Donatur: </label>
-    <input id="detail_email_donatur" value="jsimony2@skyrock.com" type="text" disabled> </li>
+    <input id="detail_email_donatur" value="{{d.email}}" type="text" disabled> </li>
 <br>
 <li>
   <label for="Timestamp">Timestamp: </label>
-  <input id="detail_timestamp_donasi" value="2021-11-16" type="date" disabled></li>
+  <input id="detail_timestamp_donasi" value="{{d.timestamp}}" type="timestamp" disabled></li>
 <br>
 <li>
   <label for="judul">Judul Penggalangan Dana: </label>
-  <input id="detail_judul" value="Ayo bantu Zulfahri menghadapi penyakit Demam Berdarahnya!" type="text" disabled ></li>
+  <input id="detail_judul" value="{{d.judul}}" type="text" disabled ></li>
 <br>
 <li>
   <label for="nominal">Nominal (Rupiah): </label>
-  <input id="detail_nominal" value="500000" type="text" disabled ></li>
+  <input id="detail_nominal" value="{{d.nominal}}" type="text" disabled ></li>
 <br>
 <li>
   <label for="metode_bayar">Metode Bayar: </label>
-  <input id="detail_metode_bayar" value="Gopay" type="text" disabled >
+  <input id="detail_metode_bayar" value="{{d.metodebayar}}" type="text" disabled >
 </li>
 <br>
 <li>
   <label for="status_anonim">Status Anonim : </label>
-  <input id="detail_status_anonim" value="Anonim" type="text" disabled >
+  <input id="detail_status_anonim" value="{{d.statusanonim}}" type="text" disabled >
 </li>
 <br>
-<li>Doa: [Disabled]
-  <label for="doa">Status Anonim : </label>
-  <input id="detail_doa" value="amin" type="text" disabled >
+<li>
+  <label for="doa">Doa : </label>
+  <input id="detail_doa" value="{{d.doa}}" type="text" disabled >
 </li>
 </ul>
 
