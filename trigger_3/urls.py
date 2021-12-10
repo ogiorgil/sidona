@@ -15,6 +15,11 @@ urlpatterns = [
         name="daftar-penggalangan-admin",
     ),
     path(
+        "daftar-penggalangan-pribadi/",
+        views.daftar_penggalangan_pribadi,
+        name="daftar-penggalangan-pribadi",
+    ),
+    path(
         "update-penggalangan/",
         views.form_update_penggalangan,
         name="update-penggalangan",

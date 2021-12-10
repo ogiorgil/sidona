@@ -10,102 +10,121 @@
 </head>
 
 <body>
-	<h1>Form Update Penggalangan Dana</h1>
-	<h3>Informasi Umum Penggalangan Dana</h3>
-	<div style="padding-left: 35px; display: table;">
-		<div class="div-row">
-			<label for="id_penggalangan">ID Penggalangan Dana: </label>
-			<input id="form_id_penggalangan" value="R-001" type="text" disabled>
-		</div>
-		<div class="div-row">
-			<label for="email_penggalang">Email Penggalang Dana: </label>
-			<input id="form_email_penggalang" value="ofew1@dion.ne.jp" type="text" disabled>
-		</div>
-		<div class="div-row">
-			<label for="judul">Judul: </label>
-			<input id="form_judul" type="text" />
-		</div>
-		<div class="div-row">
-			<label for="deskripsi">Deskripsi: </label>
-			<input id="form_deskripsi" type="text" />
-		</div>
-		<div class="div-row">
-			<label for="kota">Kota: </label>
-			<input id="form_kota" type="text" />
-		</div>
-		<div class="div-row">
-			<label for="provinsi">Provinsi: </label>
-			<input id="form_provinsi" type="text" />
-		</div>
-		<div class="div-row">
-			<label for="deadline_penggalangan">Deadline Penggalangan Dana: </label>
-			<input id="form_deadline_penggalangan" type="text" />
-		</div>
-		<div class="div-row">
-			<label for="jumlah_target_dana">Jumlah Target Dana (Rupiah): </label>
-			<input id="form_jumlah_target_dana" type="text" />
-		</div>
-		<div class="div-row">
-			<label for="status_verifikasi">Status Verifikasi: </label>
-			<input id="form_status_verifikasi" value="Belum Terverifikasi" type="text" disabled>
-		</div>
-		<div class="div-row">
-			<label for="diverifikasi_oleh">Diverifikasi Oleh: </label>
-			<input id="form_diverifikasi_oleh" type="text" disabled>
-		</div>
-	</div>
-
-	<h3>Informasi Tambahan Penggalangan Dana</h3>
-	<div style="padding-left: 35px; display: table;">
-		<div class="div-row">
-			<label for="kategori">Kategori: </label>
-			<input id="form_kategori" value="{{ kategori }}" type="text" disabled>
-		</div>
-		{% if kategori == 'Kesehatan' %}
-		<div class="div-row">
-			<label for="nik_pasien">NIK Pasien: </label>
-			<input id="form_nik_pasien" type="text" />
-		</div>
-		<div class="div-row">
-			<label for="nama_pasien">Nama Pasien: </label>
-			<input id="form_nama_pasien" type="text" />
-		</div>
-		<div class="div-row">
-			<label for="penyakit_utama">Penyakit Utama: </label>
-			<input id="form_penyakit_utama" type="text" />
-		</div>
-		<div class="div-row">
-			<label for="komorbid">Komorbid: </label>
-			<input id="form_komorbid" type="text" />
-		</div>
-		{% endif %}
-		{% if kategori == 'Rumah Ibadah' %}
-		<div class="div-row">
-			<label for="nomor_sertifikat_rumah_ibadah">Nomor Sertifikat Rumah Ibadah: </label>
-			<input id="form_nomor_sertifikat_rumah_ibadah" type="text" />
-		</div>
-		<div class="div-row">
-			<label for="kategori_aktivitas">Kategori Aktivitas: </label>
-			<input id="form_kategori_aktivitas" type="text" />
-		</div>
-		{% endif %}
-		<div class="div-row">
-			<label for="berkas_penggalangan">Berkas Penggalangan Dana: </label>
-			<input id="form_berkas_penggalangan" type="text" />
+	<form method="post">
+		<h1>Form Update Penggalangan Dana</h1>
+		<h3>Informasi Umum Penggalangan Dana</h3>
+		<div style="padding-left: 35px; display: table;">
+			<div class="div-row">
+				<label for="form_id_penggalangan">ID Penggalangan Dana: </label>
+				<input id="form_id_penggalangan" name="id" value="{{ p.id }}" type="text" readonly>
+			</div>
+			<div class="div-row">
+				<label for="form_email_penggalang">Email Penggalang Dana: </label>
+				<input id="form_email_penggalang" name="emailuser" value="{{ p.emailuser }}" type="text" readonly>
+			</div>
+			<div class="div-row">
+				<label for="form_judul">Judul: </label>
+				<input id="form_judul" name="judul" value="{{ p.judul }}" type="text" required />
+			</div>
+			<div class="div-row">
+				<label for="form_deskripsi">Deskripsi: </label>
+				<input id="form_deskripsi" name="deskripsi" value="{{ p.deskripsi }}" type="text" required />
+			</div>
+			<div class="div-row">
+				<label for="form_kota">Kota: </label>
+				<input id="form_kota" name="kota" value="{{ p.kota }}" type="text" required />
+			</div>
+			<div class="div-row">
+				<label for="form_provinsi">Provinsi: </label>
+				<input id="form_provinsi" name="provinsi" value="{{ p.provinsi }}" type="text" required />
+			</div>
+			<div class="div-row">
+				<label for="form_deadline_penggalangan">Deadline Penggalangan Dana: </label>
+				<input id="form_deadline_penggalangan" name="tanggalaktifakhir" value="{{ tanggalaktifakhir }}"
+					type="date" required />
+			</div>
+			<div class="div-row">
+				<label for="form_jumlah_target_dana">Jumlah Target Dana (Rupiah): </label>
+				<input id="form_jumlah_target_dana" name="jumlahdibutuhkan" value="{{ p.jumlahdibutuhkan }}" type="text"
+					required />
+			</div>
+			<div class="div-row">
+				<label for="form_status_verifikasi">Status Verifikasi: </label>
+				<input id="form_status_verifikasi" name="statusverifikasi" value="{{ p.statusverifikasi }}" type="text"
+					readonly>
+			</div>
+			<div class="div-row">
+				<label for="form_diverifikasi_oleh">Diverifikasi Oleh: </label>
+				<input id="form_diverifikasi_oleh" name="emailadmin" value="{{ p.emailadmin|default_if_none:'' }}"
+					type="text" readonly>
+			</div>
 		</div>
 
-		<div class="div-row">
-			<label for="catatan_pengajuan">Catatan Pengajuan: </label>
-			<input id="form_catatan_pengajuan" type="text" disabled>
+		<h3>Informasi Tambahan Penggalangan Dana</h3>
+		<div style="padding-left: 35px; display: table;">
+			<div class="div-row">
+				<label for="form_kategori">Kategori: </label>
+				<input id="form_kategori" name="namakategori" value="{{ p.namakategori }}" type="text" readonly>
+			</div>
+			{% if p.namakategori == 'Kesehatan' %}
+			<div class="div-row">
+				<label for="form_nik_pasien">NIK Pasien: </label>
+				<input id="form_nik_pasien" name="nik" value="{{ pasien.nik }}" type="text" required />
+			</div>
+			<div class="div-row">
+				<label for="form_nama_pasien">Nama Pasien: </label>
+				<input id="form_nama_pasien" name="namapasien" value="{{ pasien.nama }}" type="text" required />
+			</div>
+			<div class="div-row">
+				<label for="form_penyakit_utama">Penyakit Utama: </label>
+				<input id="form_penyakit_utama" name="penyakit" value="{{ pasien.penyakit }}" type="text" required />
+			</div>
+			<div class="div-row">
+				<label for="form_komorbid">Komorbid: </label>
+				<input id="form_komorbid" name="komorbids" value="{% for k in komorbid %}{{ k.komorbid }}, {% endfor %}"
+					type="text" required />
+			</div>
+			{% endif %}
+			{% if p.namakategori == 'Rumah Ibadah' %}
+			<div class="div-row">
+				<label for="form_nomor_sertifikat_rumah_ibadah">Nomor Sertifikat Rumah Ibadah: </label>
+				<input id="form_nomor_sertifikat_rumah_ibadah" name="idrumahibadah" type="text"
+					value="{{ rumah_ibadah.idrumahibadah }}" required />
+			</div>
+			<div class="div-row">
+				<p>Kategori Aktivitas: </p>
+				{% for ka in kategori_aktivitas %}
+				{% if ka.nama == rumah_ibadah.kategori %}
+				<input type="radio" id="{{ ka.id }}" name="ri_kategori" value="{{ ka.id }}" checked>
+				<label for="{{ ka.id }}">{{ ka.nama }}</label><br>
+				{% else %}
+				<input type="radio" id="{{ ka.id }}" name="ri_kategori" value="{{ ka.id }}">
+				<label for="{{ ka.id }}">{{ ka.nama }}</label><br>
+				{% endif %}
+				{% endfor %}
+			</div>
+			{% endif %}
+			<div class="div-row">
+				<label for="form_berkas_penggalangan">Berkas Penggalangan Dana: </label>
+				<input id="form_berkas_penggalangan" name="linkrepo" value="{{ p.linkrepo }}" type="text" required />
+			</div>
+
+			<div class="div-row">
+				<label for="form_catatan_pengajuan">Catatan Pengajuan: </label>
+				<input id="form_catatan_pengajuan" name="catatans"
+					value="{% for c in catatans %}{{ c.informasi}}, {% endfor %}" type="text" readonly>
+			</div>
 		</div>
 
-	</div>
-
-	<div class="button-container">
-		<button class="center">
-			Update
-		</button>
-	</div>
+		<div class="div-row">
+			<button class="padded-button" type="button" onclick="history.back()">
+				Cancel
+			</button>
+			<button class="padded-button" type="submit">
+				Update
+			</button>
+		</div>
+	</form>
 </body>
 
 </html>
