@@ -21,7 +21,7 @@ def form_create_donasi(request):
     if not is_authenticated(request):
         return redirect(f"/auth/login?next=/t4/create-donasi/?id={id_penggalangan}")
     
-    if request.session["role"] == "organisasi":
+    if request.session["role"] != "individu":
         return HttpResponse("Hanya individu yang bisa berdonasi")
 
     context = dict()
