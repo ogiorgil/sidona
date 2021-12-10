@@ -14,59 +14,78 @@
 </head>
 
 <body>
-  <h1>
-    Details Penggalangan Dana: <br />
-    RumahIbadah2
-  </h1>
+  <h2>Details Penggalangan Dana:</h2>
+  <h1>{{ penggalangan_dana.judul }}</h1>
 
   <hr />
 
   <h2>Informasi Umum Penggalangan Dana</h2>
   <b>ID Penggalangan Dana:</b>
-  <p>R-002</p>
+  <p>{{ penggalangan_dana.id }}</p>
 
   <b>Email Penggalang Dana:</b>
-  <p>pbarstow0@parallels.com</p>
+  <p>{{ penggalangan_dana.emailuser }}</p>
 
   <b>Judul:</b>
-  <p>RumahIbadah2</p>
+  <p>{{ penggalangan_dana.judul }}</p>
 
   <b>Deskripsi:</b>
-  <p>ri2</p>
+  <p>{{ penggalangan_dana.deskripsi }}</p>
 
   <b>Kota:</b>
-  <p>Bandung</p>
+  <p>{{ penggalangan_dana.kota }}</p>
 
   <b>Provinsi:</b>
-  <p>Jawa Barat</p>
+  <p>{{ penggalangan_dana.provinsi }}</p>
 
   <b>Deadline Penggalangan Dana:</b>
-  <p>2021-12-7</p>
+  <p>{{ penggalangan_dana.tanggalaktifakhir }}</p>
 
   <b>Jumlah Target Dana (Rupiah):</b>
-  <p>1000000</p>
+  <p>{{ penggalangan_dana.jumlahdibutuhkan }}</p>
 
   <hr />
 
   <h2>Informasi Tambahan</h2>
   <b>Kategori:</b>
-  <p>Rumah Ibadah</p>
+  <p>{{ penggalangan_dana.namakategori }}</p>
 
-  <b>Nomor Sertifikat Rumah Ibadah:</b>
-  <p>RI2236029MXABJFDCK</p>
+  {% if penggalangan_dana.namakategori == "Kesehatan" %}
+    <b>NIK Pasien:</b>
+    <p>{{ pasien.nik }}</p>
 
-  <b>Kategori Aktivitas:</b>
-  <p>Pembebasan Lahan</p>
+    <b>Nama Pasien:</b>
+    <p>{{ pasien.nama }}</p>
 
-  <b>Berkasn Penggalangan Dana:</b>
-  <p>youtube.com</p>
+    <b>Penyakit Utama:</b>
+    <p>{{ pasien.penyakit }}</p>
+
+    <b>Komorbid:</b>
+    <p>{{ pasien.komorbid }}</p>
+  {% endif %}
+
+  {% if penggalangan_dana.namakategori == "Rumah Ibadah" %}
+    <b>Nomor Sertifikat Rumah Ibadah:</b>
+    <p>{{ rumah_ibadah.nosertifikat }}</p>
+
+    <b>Kategori Aktivitas:</b>
+    <p>{{ rumah_ibadah.aktivitasnama }}</p>
+  {% endif %}
+
+  <b>Berkas Penggalangan Dana:</b>
+  <p>{{ penggalangan_dana.linkrepo }}</p>
 
   <b>Catatan Pengajuan:</b>
-  <p>-</p>
+  {% if penggalangan_dana.catatan %}
+    <p>{{ penggalangan_dana.catatan }}</p>
+  {% else %}
+    <p>-</p>
+  {% endif %}
 
   <b>Jumlah Terkumpul:</b>
-  <p>0</p>
+  <p>{{ penggalangan_dana.jumlahterkumpul }}</p>
 
+  <b>Donasi:</b><br />
   <table>
     <tr>
       <th>Email</th>
@@ -74,16 +93,27 @@
       <th>Nominal</th>
       <th>Doa</th>
     </tr>
-    <tr>
-      <th>-</th>
-      <th>-</th>
-      <th>-</th>
-      <th>-</th>
-    </tr>
+
+    {% for d in donasi %}
+      <tr>
+        <td>{{ d.email }}</td>
+        <td>{{ d.timestamp }}</td>
+        <td>{{ d.nominal }}</td>
+        <td>{{ d.doa }}</td>
+      </tr>
+    {% empty %}
+      <tr>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
+      </tr>
+    {% endfor %}
   </table>
 
+  <br />
   <b>Jumlah Terpakai:</b>
-  <p>0</p>
+  <p>{{ penggalangan_dana.jumlahterpakai }}</p>
 
   <table>
     <tr>
@@ -92,12 +122,12 @@
       <th>Deskripsi</th>
     </tr>
     <tr>
-      <th>-</th>
-      <th>-</th>
-      <th>-</th>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
     </tr>
   </table>
 
   <br />
-  <button>Cancel</button>
+  <a href="/pd">Cancel</a>
 </body>

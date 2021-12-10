@@ -1,11 +1,14 @@
 body {
-  margin-left: auto;
   margin-right: auto;
-  width: 80%;
-  text-align: center;
+  margin-left: auto;
+  padding: 10px;
+  text-align: left;
 }
 
-table {
-  margin-left: auto;
-  margin-right: auto;
+table, th, td {
+  border: 1px solid black;
+}
+
+td {
+  text-align: center;
 }
