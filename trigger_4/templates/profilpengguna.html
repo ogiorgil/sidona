@@ -26,58 +26,71 @@ tr:hover {background-color: #D6EEEE;}
 .content{
   align-items: center;
 }
+
+.row {
+  display: flex;
+}
+
+.column {
+  flex: 50%;
+}
 </style>
 </head>
 <body>
 {% include "navbar.html" %}
-<div class = 'content'>
+
 <h2>Profil Pengguna</h2>
+<div class = 'row'>
+  <div class = 'column'>
+    <label for="email_pengguna">Email : </label>
+    <input id="profil_email" value="{{p.email}}" type="text" disabled>
+    <br>
+    <br>
+    <label for="nama_pengguna">Nama : </label>
+    <input id="profil_nama" value="{{p.nama}}" type="text" disabled>
+    <br>
+    <br>
+    <label for="no_hp">Nomor HP : </label>
+    <input id="profil_hp" value="{{p.nomorhp}}" type="text" disabled>
+    <br>
+    <br>
+    <label for="alamat">Alamat : </label>
+    <input id="profil_alamat" value='{{p.alamat}}' type="text" disabled>
+    <br>
+    <br>
+    <label for="bank">Nama Bank : </label>
+    <input id="profil_bank" value="{{p.namabank}}" type="text" disabled>
+    <br>
+    <br>
+    <label for="rekening">No Rekening : </label>
+    <input id="profil_rekening" value="{{p.norek}}" type="text" disabled>
+  </div>
 
-<label for="email_pengguna">Email : </label>
-<input id="profil_email" value="{{p.email}}" type="text" disabled>
-<br>
-<br>
-<label for="nama_pengguna">Nama : </label>
-<input id="profil_nama" value="{{p.nama}}" type="text" disabled>
-<br>
-<br>
-<label for="no_hp">Nomor HP : </label>
-<input id="profil_hp" value="{{p.nomorhp}}" type="text" disabled>
-<br>
-<br>
-<label for="alamat">Alamat : </label>
-<input id="profil_alamat" value='{{p.alamat}}' type="text" disabled>
-<br>
-<br>
-<label for="bank">Nama Bank : </label>
-<input id="profil_bank" value="{{p.namabank}}" type="text" disabled>
-<br>
-<br>
-<label for="rekening">No Rekening : </label>
-<input id="profil_rekening" value="{{p.norek}}" type="text" disabled>
-<br>
-<br>
-<labelp>Jenis		:</label>
-  <br>
-  <input type="radio" id="individu" name="opsi" value="individu" checked>
-  <label for="ya">Individu</label><br>
-  <input type="radio" id="organisasi" name="opsi" value="organisasi" disabled>
-  <label for="tidak">Organisasi</label>
-<br>
-<br>
-<label for="nik">NIK : </label>
-<input id="profil_nik" value="{{p.nik}}" type="text" disabled>
-<br>
-<br>
-<label for="tanggal">Tanggal Lahir : </label>
-<input id="profil_tanggal" value="{{p.tanggallahir}}" type="date" disabled>
-<br>
-<br>
-<label for="jenis_kelamin">Jenis Kelamin : </label>
-<input id="profil_jenis_kelamin" value="{{p.jeniskelamin}}" type="text" disabled>
+  <div class= 'column'>
 
-<p>Foto KTP		:<br><img src =https://image.shutterstock.com/z/stock-vector-ktp-indonesia-id-card-1628461459.jpg width="120 px"></p>
-<p><b>Saldo Donapay: 0</b></p>
+    <labelp>Jenis		:</label>
+      <br>
+      <input type="radio" id="individu" name="opsi" value="individu" checked>
+      <label for="ya">Individu</label><br>
+      <input type="radio" id="organisasi" name="opsi" value="organisasi" disabled>
+      <label for="tidak">Organisasi</label>
+    <br>
+    <br>
+    <label for="nik">NIK : </label>
+    <input id="profil_nik" value="{{p.nik}}" type="text" disabled>
+    <br>
+    <br>
+    <label for="tanggal">Tanggal Lahir : </label>
+    <input id="profil_tanggal" value="{{p.tanggallahir}}" disabled>
+    <br>
+    <br>
+    <label for="jenis_kelamin">Jenis Kelamin : </label>
+    <input id="profil_jenis_kelamin" value="{{p.jeniskelamin}}" type="text" disabled>
+
+    <p>Foto KTP		:<br><img src =https://image.shutterstock.com/z/stock-vector-ktp-indonesia-id-card-1628461459.jpg width="120 px"></p>
+    <p><b>Saldo Donapay: 0</b></p>
+  </div>
+</div>
 
 <table>
   <tr>
@@ -103,15 +116,11 @@ tr:hover {background-color: #D6EEEE;}
         <input name="id" value="{{ w.idpd }}" hidden />
         <input type="submit" value="Delete" />
     </form>
-    
     </td>
   </tr>
   {% endfor %}
-<p><b>Wishlist Donasi: {{p.jumlahwishlist}}</b></p>
-
-
-<button>Cancel</button>
-</div>
+  <p><b>Wishlist Donasi: {{p.jumlahwishlist}}</b></p>
+  
 <script>
   var detailButtons = document.getElementsByClassName("detail_button");
 [].slice.call(detailButtons).forEach(function (button) {
