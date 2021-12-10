@@ -53,7 +53,7 @@ def daftar_penggalangan_admin_pov(request):
 @csrf_exempt
 def form_update_penggalangan(request):
     if not is_authenticated(request):
-        return redirect("/auth/login/?next=/t3/daftar-penggalangan-pribadi")
+        return redirect("/auth/login/?next=/pd")
 
     if request.session["role"] == "admin":
         return HttpResponse("Admin tidak bisa memiliki penggalangan")
@@ -162,7 +162,7 @@ def form_update_penggalangan(request):
             )
             print("update pd_rumah_ibadah", result)
 
-        return redirect("/t3/daftar-penggalangan-pribadi")
+        return redirect("/pd")
     return render(request, "form_update_penggalangan.html", context)
 
 
