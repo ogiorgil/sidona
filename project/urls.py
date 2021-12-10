@@ -8,13 +8,11 @@ import trigger_3.urls as t3
 import trigger_4.urls as t4
 
 
-
 urlpatterns = [
-    path("", include(t3)),
     path("pd/", include(pd)),
     path("t3/", include(t3)),
     path("t4/", include(t4)),
     path("admin/", admin.site.urls),
     path("komorbid/", include(komorbid)),
-    path("auth/", include(pengguna))
+    path("auth/", include(pengguna)),
 ]
