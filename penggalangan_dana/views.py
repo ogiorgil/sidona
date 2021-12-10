@@ -24,7 +24,26 @@ def read_pd(request):
         WHERE pdpd.emailuser = '{session["email"]}' AND pdpd.idkategori = k.kategori_id
     """)
 
-    data = {"penggalangan_dana": penggalangan_dana_pribadi, "email": session.get("email", "")}
+    if type(penggalangan_dana_pribadi) != list:
+        return HttpResponse("Failed to fetch Penggalangan Dana!")
+
+    jumlah_pd_id = query(f"""
+        SELECT jumlahpd, jumlahpdaktif
+        FROM penggalang_dana
+        WHERE email = '{session.get("email", "")}'
+    """)
+
+    if type(jumlah_pd_id) != list or len(jumlah_pd_id) != 1:
+        return HttpResponse("Failed to fetch jumlah Penggalangan Dana!")
+
+    jumlah_pd_id = jumlah_pd_id[0]
+
+    data = {
+        "penggalangan_dana": penggalangan_dana_pribadi,
+        "email": session.get("email", ""),
+        "jumlah_pd": jumlah_pd_id.jumlahpd,
+        "jumlah_pd_aktif": jumlah_pd_id.jumlahpdaktif
+    }
     return render(request, "read_pd.html", data)
 
 
@@ -153,6 +172,50 @@ def create_pd_view(request, session):
 
     data = {"kategori": kategori, "email": session.get("email", "")}
     return render(request, "create_pd.html", data)
+
+
+@csrf_exempt
+def delete_pd(request):
+    id = request.POST.get("id", "")
+
+    # No penggalangan dana id provided.
+    if not id:
+        return redirect("/pd")
+
+    if not is_authenticated(request):
+        return redirect(f"/auth/login?next=/pd")
+
+    session = get_session_data(request)
+    if session.get("role", "") not in ["admin", "individu", "organisasi"]:
+        return HttpResponse("You are not authorized!")
+
+    penggalangan_dana = query(f"""
+        SELECT emailuser 
+        FROM penggalangan_dana_pd
+        WHERE id = '{id}' 
+    """)
+
+    if type(penggalangan_dana) != list:
+        return HttpResponse("Failed to fetch Penggalangan Dana!")
+    
+    if len(penggalangan_dana) == 0:
+        return HttpResponse("Penggalangan Dana does not exists!")
+
+    penggalangan_dana = penggalangan_dana[0]
+
+    # Current user is not the owner
+    if penggalangan_dana.emailuser != session["email"]:
+        return HttpResponse("You are not authorized to delete this Penggalangan Dana!")
+
+    delete = query(f"""
+        DELETE FROM penggalangan_dana_pd
+        WHERE id = '{id}'
+    """)
+
+    if type(delete) != int:
+        return HttpResponse("Failed to delete Penggalangan Dana!")
+
+    return redirect("/pd")
 
 
 @csrf_exempt

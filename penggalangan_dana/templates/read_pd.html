@@ -42,32 +42,30 @@
           <td>{{ pd.namakategori }}</td>
           <td>{{ pd.statusverifikasi }}</td>
           <td>
-            <a href="/pd/details/?id={{ pd.id }}" type="button">Detail</a>
-            {% if pd.statusverifikasi == "Terverifikasi" %}
-              <button type="button">Cairkan</button>
-              {% else %}
-              <button id="update_button_{{ pd.id }}" class="update_button">
-                Update
-              </button>
+            <ul>
+              <li><a href="/pd/details/?id={{ pd.id }}">Detail</a></li>
+              <li><a href="/t3/update-penggalangan?id={{ pd.id }}" class="update_button">Update</a></li>
+
+              {% if pd.statusverifikasi == "Terverifikasi" %}
+                <li><button type="button">Cairkan</button></li>
               {% endif %}
-              <button type="button">Delete</button>
+
+              <form method="POST" action="/pd/delete/">
+                <input name="id" value="{{ pd.id }}" hidden />
+                <li><button type="submit">Delete</button></li>
+              </form>
+            </ul>
           </td>
         </tr>
       {% endfor %}
     <table>
+
+    <p>Jumlah Penggalangan Dana: {{ jumlah_pd }}</p>
+    <p>Jumlah Penggalangan Dana Aktif: {{ jumlah_pd_aktif }}</p>
   {% else %}
     <h3>Anda tidak memiliki Penggalangan Dana</h3>
   {% endif %}
 
   <br />
   <a href="/pd/create">Buat Penggalangan Dana</a>
-  <script>
-    var detailButtons = document.getElementsByClassName("update_button");
-    [].slice.call(detailButtons).forEach(function (button) {
-    button.onclick = function () {
-        let id_penggalangan = button.id.slice(-5);
-        location.href = "/t3/update-penggalangan?id=" + id_penggalangan;
-      };
-    });
-  </script>
 </body>
