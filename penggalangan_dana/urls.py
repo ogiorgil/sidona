@@ -8,4 +8,6 @@ urlpatterns = [
 
     path("kategori/", views.get_kategori, name="get_kategori"),
     path("generate-id/", views.generate_id, name="generate_id"),
+
+    path("add-pasien/", views.create_pasien, name="create_pasien"),
 ]

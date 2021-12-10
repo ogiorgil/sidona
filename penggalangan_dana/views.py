@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.http.response import HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
 from django.views.decorators.csrf import csrf_exempt
@@ -11,7 +13,7 @@ def read_pd(request):
         return redirect("/auth/login?next=/pd")
 
     session = get_session_data(request)
-    if session.get("role", "") not in ["admin", "individu", "organisasi"]:
+    if session.get("role", "") not in ["individu", "organisasi"]:
         return HttpResponse("You are not authorized!")
 
     penggalangan_dana_pribadi = query(f"""
@@ -102,39 +104,69 @@ def read_pd_details(request):
     return render(request, "read_pd_details.html", data)
 
 
+@csrf_exempt
 def create_pd(request):
     if not is_authenticated(request):
         return redirect(f"/auth/login?next=/pd/create")
 
     session = get_session_data(request)
-    if session.get("role", "") not in ["admin", "individu", "organisasi"]:
+    if session.get("role", "") not in ["individu", "organisasi"]:
         return HttpResponse("You are not authorized!")
 
     if request.method != "POST":
         return create_pd_view(request, session)
 
-    return render(request, "create_pd.html")
+    body = request.POST
+
+    pd_id = body.get("pdIdInput", "")
+    email = body.get("pdEmailInput", "")
+    judul = body.get("pdJudulInput", "")
+    deskripsi = body.get("pdDeskripsiInput", "")
+    kota = body.get("pdKotaInput", "")
+    provinsi = body.get("pdProvinsiInput", "")
+    deadline = body.get("pdDeadlinePenggalanganDanaInput", "")
+    target_dana = body.get("pdJumlahTargetDanaInput", "")
+    kategori_id = body.get("pdKategoriInput", "")
+    berkas = body.get("pdBerkasInput", "")
+
+    if not body or not (pd_id and email and judul and deskripsi and kota and provinsi and deadline and target_dana and kategori_id and berkas):
+        return HttpResponse("Must provide request body!", status=400)
+
+    current_time = datetime.today().strftime("%Y-%m-%d")
+    insert = query(f"""
+        INSERT INTO penggalangan_dana_pd VALUES
+        ('{pd_id}', '{judul}', '{deskripsi}', '{kota}', '{provinsi}', '{berkas}', 'Belum Terverifikasi', 
+        '{current_time}', null, '{deadline}', '{target_dana}', 0, 0, 0, '{email}', null, '{kategori_id}')
+    """)
+    
+    if type(insert) != int:
+        return HttpResponse("Failed to create new Penggalangan Dana!", status=500)
+
+    return redirect("/pd")
 
 
 def create_pd_view(request, session):
     kategori = query("SELECT * FROM kategori_pd")
 
     if type(kategori) != list or len(kategori) == 0:
-        return HttpResponse("Failed to fetch Kategori Penggalangan Dana!")
+        return HttpResponse("Failed to fetch Kategori Penggalangan Dana!", status=500)
 
     data = {"kategori": kategori, "email": session.get("email", "")}
-    print(data)
     return render(request, "create_pd.html", data)
 
 
 @csrf_exempt
 def generate_id(request):
     if request.method != "POST":
-        return HttpResponse("Must use POST method!")
+        return HttpResponse("Must use POST method!", status=400)
 
     body = request.POST
-    if not body or not body["id_kategori_pd"] or not body["alias_kategori_pd"]:
-        return HttpResponse("Must provide request body!")
+
+    id_kategori = body.get("id_kategori_pd", "")
+    alias_kategori = body.get("alias_kategori_pd", "")
+
+    if not body or not (id_kategori and alias_kategori):
+        return HttpResponse("Must provide request body!", status=400)
 
     id_kategori = body["id_kategori_pd"]
     alias_kategori = body["alias_kategori_pd"]
@@ -145,13 +177,40 @@ def generate_id(request):
     """)
 
     if type(id_pd) != list:
-        return HttpResponse("Failed to fetch new Penggalangan Dana ID!")
+        return HttpResponse("Failed to fetch new Penggalangan Dana ID!", status=500)
 
     if len(id_pd) == 0:
         return JsonResponse({"id": f"{alias_kategori}-001"})
 
     id_terakhir = int(id_pd[-1].id.split("-")[-1])
     return JsonResponse({"id": f"{alias_kategori}-{id_terakhir + 1:03d}"})
+
+
+@csrf_exempt
+def create_pasien(request):
+    if request.method != "POST":
+        return HttpResponse("Must use POST method!", status=400)
+
+    body = request.POST
+
+    nik = body.get("nik", "")
+    nama = body.get("nama", "")
+    tanggal_lahir = body.get("tanggalLahir", "")
+    alamat = body.get("alamat", "")
+    pekerjaan = body.get("pekerjaan", "")
+
+    if not body or not (nik and nama and tanggal_lahir and alamat and pekerjaan):
+        return HttpResponse("Must provide request body!", status=400)
+
+    insert = query(f"""
+        INSERT INTO pasien VALUES
+        ('{nik}', '{nama}', '{tanggal_lahir}', '{alamat}', '{pekerjaan}')
+    """)
+
+    if type(insert) != int:
+        return HttpResponse("Failed to create new Pasien!", status=500)
+
+    return HttpResponse("success", status=200)
 
 
 def get_kategori(_):

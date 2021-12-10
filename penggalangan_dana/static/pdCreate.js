@@ -3,6 +3,9 @@ $.get("/pd/kategori/", (data, status) => {
   if (status !== "success") return;
   listKategori = data.kategori;
   console.log(listKategori);
+}).fail(() => {
+  alert("Failed to get kategori Penggalangan Dana!");
+  window.location.reload();
 });
 
 let kategoriPd;
@@ -37,20 +40,24 @@ $(document).ready(() => {
         alias_kategori_pd: kategoriPd.alias,
       },
       (data, status) => {
+        console.log(data);
         if (status !== "success") return;
         $("#pdIdInput").val(data.id);
       }
-    );
+    ).fail(() => {
+      alert("Failed to generate new Penggalangan ID!");
+      window.location.reload();
+    });
 
     // Masukkan nama kategori pada form
     $("#pdKategoriInput").val(kategoriPd.id);
     $("#pdNamaKategori").val(kategoriPd.nama);
 
     // Jika kategori "Kesehatan", tampilkan pemilihan Pasien
-    if (kategoriPd === "2") {
+    if (kategoriPd.nama === "Kesehatan") {
       $("#formKategoriPd").hide();
       $("#dialogTambahPasien").show();
-    } else if (kategoriPd === "1") {
+    } else if (kategoriPd.id === "Rumah Ibadah") {
       $("#formKategoriPd").hide();
       $("#dialogTambahRumahIbadah").show();
     } else {
@@ -74,13 +81,33 @@ $(document).ready(() => {
       $("#cekPasien").show();
     });
 
-  // Section form Pasien
+  // Section form new Pasien
   $("#pasienNextButton").click(() => {
-    nikPasien = $("pasienNikInput").text();
-    namaPasien = $("pasienNamaInput").text();
-    tanggalLahirPasien = $("pasienTanggalLahirInput").text();
-    alamatPasien = $("pasienAlamatInput").text();
-    pekerjaanPasien = $("pasienPekerjaanInput").text();
+    nikPasien = $("#pasienNikInput").val();
+    namaPasien = $("#pasienNamaInput").val();
+    tanggalLahirPasien = $("#pasienTanggalLahirInput").val();
+    alamatPasien = $("#pasienAlamatInput").val();
+    pekerjaanPasien = $("#pasienPekerjaanInput").val();
+
+    $.post(
+      "/pd/add-pasien/",
+      {
+        nik: nikPasien,
+        nama: namaPasien,
+        tanggalLahir: tanggalLahirPasien,
+        alamat: alamatPasien,
+        pekerjaan: pekerjaanPasien,
+      },
+      (data, status) => {
+        if (status !== "success" || data !== "success") return;
+
+        $("#pdNikPasienInput").val(nikPasien);
+        $("#pdNamaPasienInput").val(namaPasien);
+      }
+    ).fail(() => {
+      alert("Failed to create new Pasien!");
+      window.location.reload();
+    });
 
     $("#formPasien").hide();
     $("#formPd").show();
