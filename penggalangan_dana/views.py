@@ -24,7 +24,7 @@ def read_pd(request):
         WHERE pdpd.emailuser = '{session["email"]}' AND pdpd.idkategori = k.kategori_id
     """)
 
-    data = {"penggalangan_dana": penggalangan_dana_pribadi}
+    data = {"penggalangan_dana": penggalangan_dana_pribadi, "email": session.get("email", "")}
     return render(request, "read_pd.html", data)
 
 

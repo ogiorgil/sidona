@@ -10,6 +10,7 @@
 
 <body>
   <h1>Daftar Penggalangan Dana Pribadi</h1>
+  <h3>{{ email }}</h3>
 
   {% if penggalangan_dana %}
     <table>
@@ -41,8 +42,10 @@
           <td>{{ pd.statusverifikasi }}</td>
           <td>
             <a href="/pd/details/?id={{ pd.id }}" type="button">Detail</a>
-            <button type="button">Cairkan</button>
-            <button type="button">Delete</button>
+            {% if pd.statusverifikasi == "Terverifikasi" %}
+              <button type="button">Cairkan</button>
+              <button type="button">Delete</button>
+            {% endif %}
           </td>
         </tr>
       {% endfor %}
