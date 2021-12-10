@@ -15,10 +15,6 @@ def detail_penggalangan_pengguna_pov(request):
     return render(request, "detail_penggalangan_dana.html", response)
 
 
-# def form_create_donasi(request):
-#     return render(request, "formdonasi.html")
-
-
 @csrf_exempt
 def form_create_donasi(request):
     id_penggalangan = request.GET.get("id")
