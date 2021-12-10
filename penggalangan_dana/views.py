@@ -24,7 +24,26 @@ def read_pd(request):
         WHERE pdpd.emailuser = '{session["email"]}' AND pdpd.idkategori = k.kategori_id
     """)
 
-    data = {"penggalangan_dana": penggalangan_dana_pribadi, "email": session.get("email", "")}
+    if type(penggalangan_dana_pribadi) != list:
+        return HttpResponse("Failed to fetch Penggalangan Dana!")
+
+    jumlah_pd_id = query(f"""
+        SELECT jumlahpd, jumlahpdaktif
+        FROM penggalang_dana
+        WHERE email = '{session.get("email", "")}'
+    """)
+
+    if type(jumlah_pd_id) != list or len(jumlah_pd_id) != 1:
+        return HttpResponse("Failed to fetch jumlah Penggalangan Dana!")
+
+    jumlah_pd_id = jumlah_pd_id[0]
+
+    data = {
+        "penggalangan_dana": penggalangan_dana_pribadi, 
+        "email": session.get("email", ""), 
+        "jumlah_pd": jumlah_pd_id.jumlahpd, 
+        "jumlah_pd_aktif": jumlah_pd_id.jumlahpdaktif
+    }
     return render(request, "read_pd.html", data)
 
 
