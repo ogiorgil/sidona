@@ -5,6 +5,7 @@
 
   <link rel="stylesheet" type="text/css" href="{% static 'pdRead.css' %}" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="{% static 'cairkan_button.js' %}"></script>
   <script src="{% static 'pdRead.js' %}"></script>
 </head>
 
@@ -40,8 +41,8 @@
           <td>{{ pd.namakategori }}</td>
           <td>{{ pd.statusverifikasi }}</td>
           <td>
-            <button type="button">Detail</button>
-            <button type="button">Cairkan</button>
+            <button type="button" id="detail_button_{{pd.id}}">Detail</button>
+            <button type="button" id="cairkan_button_{{pd.id}}">Cairkan</button>
             <button type="button">Delete</button>
           </td>
         </tr>
