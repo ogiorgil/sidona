@@ -44,8 +44,12 @@
             <a href="/pd/details/?id={{ pd.id }}" type="button">Detail</a>
             {% if pd.statusverifikasi == "Terverifikasi" %}
               <button type="button">Cairkan</button>
+              {% else %}
+              <button id="update_button_{{ pd.id }}" class="update_button">
+                Update
+              </button>
+              {% endif %}
               <button type="button">Delete</button>
-            {% endif %}
           </td>
         </tr>
       {% endfor %}
@@ -56,4 +60,13 @@
 
   <br />
   <a href="/pd/create">Buat Penggalangan Dana</a>
+  <script>
+    var detailButtons = document.getElementsByClassName("update_button");
+    [].slice.call(detailButtons).forEach(function (button) {
+    button.onclick = function () {
+        let id_penggalangan = button.id.slice(-5);
+        location.href = "/t3/update-penggalangan?id=" + id_penggalangan;
+      };
+    });
+  </script>
 </body>

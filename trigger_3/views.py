@@ -52,11 +52,11 @@ def daftar_penggalangan_admin_pov(request):
 
 @csrf_exempt
 def form_update_penggalangan(request):
-    # if not is_authenticated(request):
-    #     return redirect("/auth/login/?next=/t3/daftar-penggalangan-pribadi")
+    if not is_authenticated(request):
+        return redirect("/auth/login/?next=/pd")
 
-    # if request.session["role"] == "admin":
-    #     return HttpResponse("Admin tidak bisa memiliki penggalangan")
+    if request.session["role"] == "admin":
+        return HttpResponse("Admin tidak bisa memiliki penggalangan")
 
     context = dict()
     id_penggalangan = request.GET.get("id")
@@ -162,7 +162,7 @@ def form_update_penggalangan(request):
             )
             print("update pd_rumah_ibadah", result)
 
-        return redirect("/t3/daftar-penggalangan-pribadi")
+        return redirect("/pd")
     return render(request, "form_update_penggalangan.html", context)
 
 
@@ -266,7 +266,7 @@ def form_create_kategori(request):
     if request.method == "POST":
         body = request.POST
         namakategori = body["namakategori"]
-        
+
         query_str = f"INSERT INTO kategori_pd (namakategori, alias_kategori) VALUES ('{namakategori}', '{namakategori[0]}')"
         result = query(query_str)
         return redirect("/t3/kategori-penggalangan-admin/")
